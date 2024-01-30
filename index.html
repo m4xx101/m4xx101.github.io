@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #39ff14;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 10px;
+        }
+
+        nav a {
+            color: #39ff14;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 18px;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+            background-color: #555;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            font-size: 16px;
+            margin: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .command-prompt {
+            background-color: #000;
+            color: #39ff14;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 20px;
+            text-align: left;
+        }
+
+        #hackTheBoxContainer {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+
+        footer {
+            background-color: #333;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .loading-bar {
+            background-color: #000;
+            height: 20px;
+            width: 60%;
+            margin: 10px auto;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loading-progress {
+            background-color: #39ff14;
+            height: 100%;
+            width: 50%;
+            animation: loadingAnimation 50s ; /* Increase animation duration for a slower progress bar */
+        }
+
+        @keyframes loadingAnimation {
+            0% { width: 0; }
+            50% { width: 100%; }
+            100% { width: 0; }
+        }
+
+        /* Popup CSS */
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #000;
+            color: #39ff14;
+            padding: 20px;
+            border: 2px solid #39ff14;
+            border-radius: 10px;
+            z-index: 1001;
+            text-align: left;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Deepak M.</h1>
+        <p>Penetration tester with 5+ years of experience in various fields</p>
+    </header>
+
+    <nav>
+        <a href="https://www.linkedin.com/in/deepakmistry101101/" target="_blank">LinkedIn</a>
+        <a href="https://github.com/m4xx101" target="_blank">GitHub</a>
+        <a href="https://twitter.com/1m4xx0" target="_blank">Twitter</a>
+    </nav>
+
+    <div class="command-prompt">
+    <span class="user">m4xx</span><span class="at">@</span><span class="host">m4xx-pc</span> <span class="path">~</span> <span class="command">$ type ./whoami.txt</span>
+        <br>
+        <br>
+        <span>Call me just a tech. As a seasoned penetration tester, I've got a knack for ethical hacking and revealing those hidden vulnerabilities in networks, systems, and applications.<br><br> My toolbox? It's packed with industry-standard tools, and my brain's wired with deep insights into various operating systems and platforms.
+
+I'm always on the prowl for the latest in security trends and threats – because keeping organizations safe from cyber attacks is kind of my thing.<br>
+
+<br>My playgrounds of expertise? Think Blockchain security, AI and LLM security, outsmarting Smart Contracts in DeFi, and the art of Red Teaming. Simply put, if there's a digital challenge out there, I'm ready to take it head-on.</span>
+        <br><br>
+        <span>And yes, For me this ASCII art looks cool :)</span>
+    </div>
+    
+
+    <pre>
+      <span style="color: blue;">████████████      </span>
+  <span style="color: blue;">████▒▒▒▒▒▒▒▒░░░░████  </span>
+<span style="color: #808080;">██▒▒▒▒            ░░░░██</span>
+<span style="color: #808080;">████                ████</span>
+<span style="color: #808080;">██░░████        ████▓▓██</span>
+<span style="color: #808080;">██░░░░░░████████    ▓▓██</span>
+<span style="color: #808080;">██░░░░    ▒▒▒▒▒▒  ▒▒▓▓██</span>
+<span style="color: #808080;">██░░░░  ░░▒▒▒▒▒▒  ▓▓▓▓██</span>
+  <span style="color: #808080;">██░░░░  ░░▒▒▒▒▒▒▓▓██  </span>
+  <span style="color: #808080;">██░░░░  ░░▒▒▒▒  ▓▓██  </span>
+  <span style="color: #808080;">██░░░░░░░░▒▒▒▒▒▒▓▓██  </span>
+    <span style="color: #808080;">██░░░░░░▒▒▒▒▒▒██    </span>
+    <span style="color: #808080;">██▒▒░░░░▒▒▒▒▒▒██    </span>
+      <span style="color: #808080;">████████████      </span>
+    </pre>
+    <p>
+        Discord: m4xx6699<br>
+        Email: deepakhelpon@gmail.com
+    </p>
+</div>
+
+    <footer>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+        <p>ahh. Compiling the loader..</p>
+    </footer>
+    <div id="hackTheBoxContainer">
+        <script src="https://www.hackthebox.eu/badge/123105"></script>
+    </div>
+
+    <!-- Popup and overlay divs -->
+    <div class="overlay"></div>
+    <div class="popup">
+    <h2>Hacking Complete!</h2>
+    <p>Congratulations! You've successfully waited for a progress bar. Your reward? My resume - it's almost as interesting as watching paint dry.</p>
+    <a href="https://drive.google.com/file/d/1JBTCXssqL1tm-vLZ2ye43MSVgtc9RjZR/view?usp=sharing" download="Deepak_Mistry_Resume_5_years.pdf" style="color: #39ff14; text-decoration: underline;">Download My Resume</a>
+    <br><br>
+    <button onclick="closePopup()">Close</button>
+</div>
+
+    <script>
+    // JavaScript to display the popup and fetch the IP address
+    document.addEventListener('DOMContentLoaded', function() {
+        const progressBar = document.querySelector('.loading-progress');
+        progressBar.addEventListener('animationend', function() {
+            document.querySelector('.popup').style.display = 'block';
+            document.querySelector('.overlay').style.display = 'block';
+
+            // Fetching and displaying the IP address
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    // Create a new paragraph element to show the IP
+                    var ipParagraph = document.createElement("p");
+                    ipParagraph.textContent = "Your IP Address: " + data.ip;
+
+                    // Add the paragraph to the popup
+                    document.querySelector('.popup').appendChild(ipParagraph);
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    });
+
+    function closePopup() {
+        document.querySelector('.popup').style.display = 'none';
+        document.querySelector('.overlay').style.display = 'none';
+    }
+    </script>
+
+</body>
+</html>
