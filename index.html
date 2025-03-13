@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>D33P4K_M - Cybersecurity Specialist</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --main-color: #39ff14;
@@ -204,15 +205,23 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 20px;
-            max-width: 1200px;
+            width: 100%;
+            max-width: 100%;
             margin: 0 auto;
             padding: 0 20px;
+            box-sizing: border-box;
         }
 
         @media (min-width: 768px) {
             .container {
                 grid-template-columns: 1fr 1fr;
             }
+        }
+
+        /* Ensure terminal and other elements span properly */
+        .terminal, .command-prompt, .project-card, .skill-category {
+            width: 100%;
+            box-sizing: border-box;
         }
 
         .terminal {
@@ -476,26 +485,6 @@
             cursor: pointer;
         }
 
-        #hackTheBoxContainer {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            z-index: 999;
-        }
-
-        .easter-egg-hint {
-            position: fixed;
-            bottom: 50px;
-            right: 20px;
-            background-color: var(--terminal-bg);
-            border: 1px solid var(--terminal-border);
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 12px;
-            opacity: 0.7;
-            z-index: 998;
-        }
-
         /* Project Section */
         .projects {
             display: grid;
@@ -555,10 +544,1222 @@
         .typing-container {
             display: inline-block;
         }
+
+        /* Add these styles for the exploit loading animation */
+        .exploit-loading-container {
+            background-color: rgba(0, 0, 0, 0.3);
+            height: 20px;
+            width: 100%;
+            margin: 10px 0;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--terminal-border);
+        }
+
+        .exploit-loading-bar {
+            background-color: var(--main-color);
+            height: 100%;
+            width: 0%;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 10px var(--main-color);
+        }
+
+        /* Add responsive design rules */
+        @media (max-width: 768px) {
+            .project-container {
+                flex-direction: column;
+            }
+            
+            .project-image, .project-details {
+                width: 100%;
+            }
+            
+            table {
+                font-size: 14px;
+            }
+            
+            .skill-progress {
+                width: 100%;
+            }
+            
+            #game-container {
+                width: 95%;
+                height: 80%;
+            }
+            
+            #main-game-container {
+                padding: 10px;
+            }
+            
+            .game-control {
+                font-size: 14px;
+                padding: 5px;
+            }
+        }
+
+        /* Update the mode toggle to be more seamless */
+        .mode-toggle {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            background-color: rgba(10, 10, 10, 0.7);
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid rgba(57, 255, 20, 0.5);
+            box-shadow: 0 0 5px rgba(57, 255, 20, 0.3);
+            transition: opacity 0.3s ease;
+            opacity: 0.7;
+        }
+
+        .mode-toggle:hover {
+            opacity: 1;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            transition: .4s;
+            border: 1px solid rgba(57, 255, 20, 0.5);
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 2px;
+            background-color: var(--main-color);
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: rgba(25, 25, 112, 0.5);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(18px);
+            background-color: #add8e6;
+        }
+
+        .slider.round {
+            border-radius: 20px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        .mode-label {
+            color: var(--main-color);
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        /* Add these styles for professional mode */
+        body.professional-mode {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body.professional-mode .terminal,
+        body.professional-mode .command-prompt,
+        body.professional-mode header,
+        body.professional-mode nav,
+        body.professional-mode .popup,
+        body.professional-mode #game-container {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        body.professional-mode pre {
+            background-color: rgba(240, 240, 240, 0.7);
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        body.professional-mode .game-control,
+        body.professional-mode #game-message,
+        body.professional-mode #game-score {
+            color: #2c3e50;
+            text-shadow: none;
+        }
+
+        body.professional-mode #main-game-container {
+            background-color: rgba(245, 245, 245, 0.9);
+        }
+
+        body.professional-mode #game-close-btn {
+            color: #2c3e50;
+        }
+
     </style>
+
+    <script>
+    // Move the mode toggle initialization to the top of the script
+    // so it runs first when the page loads
+    function initializeModeToggle() {
+        const modeSwitch = document.getElementById('mode-switch');
+        const modeLabel = document.querySelector('.mode-label');
+        
+        if (!modeSwitch || !modeLabel) {
+            console.error('Mode toggle elements not found');
+            return;
+        }
+        
+        // Define professional mode CSS variables
+        const professionalModeVars = {
+            '--main-color': '#2c3e50',
+            '--secondary-color': '#3498db',
+            '--bg-color': '#f5f5f5',
+            '--alt-bg-color': '#e0e0e0',
+            '--text-color': '#333',
+            '--accent-color': '#3498db',
+            '--terminal-bg': 'rgba(240, 240, 240, 0.95)',
+            '--terminal-border': '#2c3e50',
+            '--glitch-color-1': '#e74c3c',
+            '--glitch-color-2': '#3498db'
+        };
+        
+        // Define hacker mode CSS variables (default)
+        const hackerModeVars = {
+            '--main-color': '#39ff14',
+            '--secondary-color': '#0c6',
+            '--bg-color': '#000',
+            '--alt-bg-color': '#111',
+            '--text-color': '#ddd',
+            '--accent-color': '#0f3',
+            '--terminal-bg': 'rgba(10, 10, 10, 0.8)',
+            '--terminal-border': '#39ff14',
+            '--glitch-color-1': '#ff00ff',
+            '--glitch-color-2': '#00ffff'
+        };
+        
+        // Function to apply mode
+        function applyMode(isProfessional) {
+            const root = document.documentElement;
+            const vars = isProfessional ? professionalModeVars : hackerModeVars;
+            
+            // Apply all CSS variables
+            for (const [key, value] of Object.entries(vars)) {
+                root.style.setProperty(key, value);
+            }
+            
+            // Toggle body class
+            if (isProfessional) {
+                document.body.classList.add('professional-mode');
+                modeLabel.textContent = 'Professional Mode';
+            } else {
+                document.body.classList.remove('professional-mode');
+                modeLabel.textContent = 'Hacker Mode';
+            }
+            
+            // Update game canvas if it exists
+            const canvas = document.getElementById('game-canvas');
+            if (canvas) {
+                canvas.style.backgroundColor = isProfessional ? '#f5f5f5' : '#000';
+            }
+        }
+        
+        // Check for saved mode preference
+        const savedMode = localStorage.getItem('website-mode');
+        if (savedMode === 'professional') {
+            modeSwitch.checked = true;
+            applyMode(true);
+        } else {
+            applyMode(false);
+        }
+        
+        // Add event listener for mode switch
+        modeSwitch.addEventListener('change', function() {
+            const isProfessional = this.checked;
+            localStorage.setItem('website-mode', isProfessional ? 'professional' : 'hacker');
+            applyMode(isProfessional);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize mode toggle first
+        initializeModeToggle();
+        
+        // Add the game container to the page
+        document.body.insertAdjacentHTML('beforeend', `
+        <div id="main-game-container">
+            <button id="game-close-btn" onclick="closeMainGame()">×</button>
+            <div id="game-message">Press SPACE to start</div>
+            <div id="game-score">Score: 0 | Level: 1</div>
+            <canvas id="game-canvas"></canvas>
+            <div class="game-control">Use ← → keys or touch to move paddle</div>
+        </div>
+        `);
+        
+        // Initialize the Matrix background
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+    
+        // Hidden input for keyboard commands
+        const hiddenInput = document.getElementById('hidden-input');
+        
+        // Show progress bar on page load
+        const progressBar = document.querySelector('.progress-bar');
+        
+        // Matrix background
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const letters = '01'.split('');
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+    const drops = [];
+        
+    for (let i = 0; i < columns; i++) {
+            drops[i] = 1;
+    }
+    
+    function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+            ctx.fillStyle = '#39ff14';
+            ctx.font = fontSize + 'px monospace';
+        
+        for (let i = 0; i < drops.length; i++) {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+                
+                drops[i]++;
+            }
+        }
+        
+        setInterval(drawMatrix, 33);
+        
+        // Focus hidden input
+        hiddenInput.focus();
+        
+        // Keep focus on the hidden input
+        document.addEventListener('click', function() {
+            hiddenInput.focus();
+        });
+        
+        // Terminal link
+        document.getElementById('terminal-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            openTerminalGame();
+        });
+        
+        // Progress bar animation end
+        if (progressBar) {
+        progressBar.addEventListener('animationend', function() {
+            document.querySelector('.popup').style.display = 'block';
+            document.querySelector('.overlay').style.display = 'block';
+            
+            // Fetch and display the IP address
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('ip-display').textContent = "Your IP Address: " + data.ip;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+        }
+        
+        // Easter egg: keyboard input listener
+        let keysPressed = "";
+        const targetWord = "findme";
+        
+        hiddenInput.addEventListener('input', function(e) {
+            keysPressed += e.data.toLowerCase();
+            
+            // Only keep the last N characters where N is the length of the target word
+            if (keysPressed.length > targetWord.length) {
+                keysPressed = keysPressed.slice(-targetWord.length);
+            }
+            
+            // Check if the keys pressed match the target word
+            if (keysPressed === targetWord) {
+                openTerminalGame();
+                keysPressed = "";
+            }
+        });
+    });
+    
+    function closePopup() {
+        document.querySelector('.popup').style.display = 'none';
+        document.querySelector('.overlay').style.display = 'none';
+    }
+    
+    // Terminal Game Logic
+    let gameHistory = [];
+    const gameCommands = {
+        help: "Available commands: help, clear, ls, cat, cd, pwd, whoami, ping, nmap, exploit, exit, play",
+        ls: "Documents  Pictures  secret_folder  backdoor.sh",
+        "cat backdoor.sh": "#!/bin/bash\n# This is a backdoor script\necho 'Connecting to remote server...'\nsleep 2\necho 'Access granted!'\necho 'Type exploit to continue'",
+        pwd: "/home/hacker",
+        whoami: "guest (limited access)",
+        "ls secret_folder": "Access denied. Higher privileges required.",
+        "cd secret_folder": "Access denied. Higher privileges required.",
+        ping: function() {
+            const targets = ['8.8.8.8', '1.1.1.1', 'google.com', 'example.com'];
+            const target = targets[Math.floor(Math.random() * targets.length)];
+            
+            let output = `PING ${target} (${(Math.floor(Math.random() * 255) + 1)}.${(Math.floor(Math.random() * 255))}.${(Math.floor(Math.random() * 255))}.${(Math.floor(Math.random() * 255))}) 56(84) bytes of data.\n`;
+            
+            // Generate ping responses
+            for (let i = 1; i <= 4; i++) {
+                const time = (Math.random() * 50 + 20).toFixed(1);
+                output += `64 bytes from ${target}: icmp_seq=${i} ttl=113 time=${time} ms\n`;
+            }
+            
+            // Add statistics
+            const minTime = (Math.random() * 20 + 10).toFixed(3);
+            const avgTime = (Math.random() * 30 + 20).toFixed(3);
+            const maxTime = (Math.random() * 40 + 30).toFixed(3);
+            
+            output += `\n--- ${target} ping statistics ---\n`;
+            output += `4 packets transmitted, 4 received, 0% packet loss, time ${Math.floor(Math.random() * 100) + 3000}ms\n`;
+            output += `rtt min/avg/max/mdev = ${minTime}/${avgTime}/${maxTime}/${(Math.random() * 10).toFixed(3)} ms`;
+            
+            return output;
+        },
+        nmap: function() {
+            const target = ['192.168.1.1', '10.0.0.1', 'localhost', 'target-server.local'][Math.floor(Math.random() * 4)];
+            
+            let output = `Starting Nmap 7.93 ( https://nmap.org ) at ${new Date().toLocaleString()}\n`;
+            output += `Nmap scan report for ${target}\n`;
+            output += `Host is up (0.0${Math.floor(Math.random() * 10)}s latency).\n`;
+            output += `Not shown: ${Math.floor(Math.random() * 990) + 10} closed ports\n\n`;
+            output += `PORT     STATE SERVICE       VERSION\n`;
+            
+            // Add some random open ports
+            const ports = [
+                { port: 22, service: 'ssh', version: 'OpenSSH 8.2p1' },
+                { port: 80, service: 'http', version: 'Apache httpd 2.4.41' },
+                { port: 443, service: 'https', version: 'nginx 1.18.0' },
+                { port: 3306, service: 'mysql', version: 'MySQL 5.7.33' }
+            ];
+            
+            for (const port of ports) {
+                output += `${port.port.toString().padEnd(8)}open  ${port.service.padEnd(14)}${port.version}\n`;
+            }
+            
+            output += `\nService detection performed. Please report any incorrect results at https://nmap.org/submit/ .\n`;
+            output += `Nmap done: 1 IP address (1 host up) scanned in ${Math.floor(Math.random() * 10) + 3}.${Math.floor(Math.random() * 100)} seconds`;
+            
+            return output;
+        },
+        exploit: "Exploiting system...\nElevating privileges...\nAccess granted! You are now root.\nCongratulations! You completed the hacking challenge!",
+        play: "Launching Breakout game..."
+    };
+    
+    function openTerminalGame() {
+        document.getElementById('game-container').style.display = 'block';
+        document.querySelector('.overlay').style.display = 'block';
+        
+        // Initialize the game with a welcome message
+        const gameContent = document.getElementById('game-content');
+        gameContent.innerHTML = '<div style="color: #39ff14;">Welcome to Hack The System!</div>';
+        gameContent.innerHTML += '<div style="color: #39ff14;">This is a simulated terminal. Type "help" to see available commands.</div>';
+        gameContent.innerHTML += '<div style="color: #39ff14;">Your mission: Gain root access to the system.</div>';
+        gameContent.innerHTML += '<div style="color: #39ff14;">Type "play" to start a game of Breakout.</div>';
+        gameContent.innerHTML += '<div style="color: #999; margin-top: 10px;">root@challenge:~# </div>';
+        
+        // Clear any previous commands
+        gameHistory = [];
+        
+        // Set focus on input with a slight delay
+        setTimeout(() => {
+            const inputField = document.getElementById('game-input');
+            inputField.focus();
+            
+            // Keep focus on terminal when clicking anywhere in container
+            document.getElementById('game-container').onclick = function(e) {
+                if (e.target.id !== 'game-close') {
+                    inputField.focus();
+                }
+            };
+        }, 100);
+    }
+    
+    function closeGame() {
+        document.getElementById('game-container').style.display = 'none';
+        document.querySelector('.overlay').style.display = 'none';
+    }
+    
+    // Handle game input
+    document.addEventListener('DOMContentLoaded', function() {
+        const gameInput = document.getElementById('game-input');
+        if (gameInput) {
+            gameInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            const command = this.value.trim().toLowerCase();
+            const gameContent = document.getElementById('game-content');
+            
+            // Add command to game history
+            gameHistory.push(command);
+            
+            // Display the command
+            gameContent.innerHTML += '<div style="color: #39ff14;">root@challenge:~# ' + command + '</div>';
+            
+            // Process the command
+            if (command === 'clear') {
+                gameContent.innerHTML = '';
+            } else if (command === 'exit') {
+                closeGame();
+                    } else if (command === 'play') {
+                        gameContent.innerHTML += '<div style="color: #DDD;">' + gameCommands.play + '</div>';
+                        
+                        // Close terminal and launch game with a small delay to ensure proper cleanup
+                        closeGame();
+                        setTimeout(function() {
+                            // Make sure the game container is visible
+                            const gameContainer = document.getElementById('main-game-container');
+                            if (gameContainer) {
+                                // Launch the game
+                                launchBreakoutGame();
+                            } else {
+                                console.error("Game container not found!");
+                            }
+                        }, 100);
+            } else if (gameCommands[command]) {
+                        if (typeof gameCommands[command] === 'function') {
+                            gameContent.innerHTML += '<div style="color: #DDD;">' + gameCommands[command]() + '</div>';
+                        } else {
+                gameContent.innerHTML += '<div style="color: #DDD;">' + gameCommands[command] + '</div>';
+                        }
+                
+                        // Special case for the "exploit" command
+                if (command === 'exploit') {
+                            // Create a loading bar for exploit command
+                            gameContent.innerHTML += '<div class="exploit-loading-container"><div class="exploit-loading-bar"></div></div>';
+                            const loadingBar = gameContent.querySelector('.exploit-loading-bar');
+                            
+                            // Animate loading bar
+                            let progress = 0;
+                            const loadingInterval = setInterval(() => {
+                                progress += 5;
+                                loadingBar.style.width = progress + '%';
+                                
+                                if (progress >= 100) {
+                                    clearInterval(loadingInterval);
+                                    gameContent.innerHTML += '<div style="color: #F44336; margin-top: 15px;">🏆 You\'ve successfully hacked the system! Congratulations!</div>';
+                                }
+                            }, 100);
+                }
+            } else {
+                gameContent.innerHTML += '<div style="color: #F44336;">Command not found: ' + command + '</div>';
+            }
+            
+            // Scroll to bottom
+            gameContent.scrollTop = gameContent.scrollHeight;
+            
+            // Clear the input
+            this.value = '';
+        }
+    });
+    
+            // Keep focus on input
+            gameInput.addEventListener('blur', function() {
+                if (document.getElementById('game-container').style.display === 'block') {
+                    setTimeout(() => this.focus(), 10);
+                }
+            });
+        }
+    });
+
+    /* Add these ASCII arts for the game */
+    const asciiArts = [
+        /* Current ASCII art */
+        `
+          <span style="color: #4CAF50;">████████████      </span>
+      <span style="color: #4CAF50;">████▒▒▒▒▒▒▒▒░░░░████  </span>
+    <span style="color: #808080;">██▒▒▒▒            ░░░░██</span>
+    <span style="color: #808080;">████                ████</span>
+    <span style="color: #808080;">██░░████        ████▓▓██</span>
+    <span style="color: #808080;">██░░░░░░████████    ▓▓██</span>
+    <span style="color: #808080;">██░░░░    ▒▒▒▒▒▒  ▒▒▓▓██</span>
+    <span style="color: #808080;">██░░░░  ░░▒▒▒▒▒▒  ▓▓▓▓██</span>
+      <span style="color: #808080;">██░░░░  ░░▒▒▒▒▒▒▓▓██  </span>
+      <span style="color: #808080;">██░░░░  ░░▒▒▒▒  ▓▓██  </span>
+      <span style="color: #808080;">██░░░░░░░░▒▒▒▒▒▒▓▓██  </span>
+        <span style="color: #808080;">██░░░░░░▒▒▒▒▒▒██    </span>
+        <span style="color: #808080;">██▒▒░░░░▒▒▒▒▒▒██    </span>
+          <span style="color: #808080;">████████████      </span>
+        `,
+        /* Computer ASCII art */
+        `
+           <span style="color: #39ff14;">        ,----------------,</span>
+           <span style="color: #39ff14;">        |--------------,|</span>
+           <span style="color: #39ff14;">        |              ||</span>
+           <span style="color: #39ff14;">        |              ||</span>
+           <span style="color: #39ff14;">        |              ||</span>
+           <span style="color: #39ff14;">        |  H A C K E R ||</span>
+           <span style="color: #39ff14;">        |              ||</span>
+           <span style="color: #39ff14;">        | M E N T A L  ||</span>
+           <span style="color: #39ff14;">        |              ||</span>
+           <span style="color: #39ff14;">        |              ||</span>
+           <span style="color: #39ff14;">        '--------------'|</span>
+           <span style="color: #39ff14;">        |[%8 @ O 8%]|</span>
+           <span style="color: #39ff14;">        | [%8@@88@%] |</span>
+           <span style="color: #39ff14;">        |              |</span>
+           <span style="color: #39ff14;">        '--------------'</span>
+        `
+    ];
+
+    /* Add game-related styles programmatically */
+    const gameStyles = `
+    #main-game-container {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        z-index: 9999;
+        overflow: hidden;
+    }
+    
+    #game-canvas {
+        display: block;
+        margin: 0 auto;
+        background: #000;
+    }
+    
+    #game-message {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #39ff14;
+        font-family: 'Courier New', monospace;
+        font-size: 24px;
+        text-align: center;
+        text-shadow: 0 0 10px #39ff14;
+        z-index: 10000;
+        pointer-events: none;
+    }
+    
+    #game-score {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        color: #39ff14;
+        font-family: 'Courier New', monospace;
+        font-size: 18px;
+        text-shadow: 0 0 5px #39ff14;
+    }
+    
+    .game-control {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #39ff14;
+        font-family: 'Courier New', monospace;
+        font-size: 16px;
+        text-shadow: 0 0 5px #39ff14;
+    }
+    
+    #game-close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        color: #39ff14;
+        font-size: 24px;
+        cursor: pointer;
+        z-index: 10001;
+    }`;
+    
+    /* Add style element to head */
+    const styleEl = document.createElement('style');
+    styleEl.textContent = gameStyles;
+    document.head.appendChild(styleEl);
+    
+    /* Main game variables and functions */
+    let mainGameLoop = null;
+    let gameState = {
+        running: false,
+        waiting: true,
+        gameOver: false,
+        win: false,
+        score: 0,
+        level: 1,
+        speed: 1,
+        paddle: null,
+        balls: [],
+        bricks: [],
+        powerUps: []
+    };
+    
+    // All game functions
+    function launchBreakoutGame() {
+        // Show the game container
+        const gameContainer = document.getElementById('main-game-container');
+        gameContainer.style.display = 'block';
+        
+        // Always use the hacker theme for the game container background
+        gameContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+        
+        // Initialize game state
+        gameState.paddle = {
+            x: 0,
+            y: 0,
+            width: 100,
+            height: 15,
+            speed: 7,
+            rightPressed: false,
+            leftPressed: false,
+            touchStartX: null
+        };
+        
+        gameState.score = 0;
+        gameState.level = 1;
+        gameState.speed = 1;
+        gameState.balls = [{
+            x: 0,
+            y: 0,
+            radius: 8,
+            dx: 4,
+            dy: -4,
+            active: true
+        }];
+        gameState.bricks = [];
+        gameState.powerUps = [];
+        gameState.waiting = true;
+        gameState.running = false;
+        gameState.gameOver = false;
+        gameState.win = false;
+        
+        // Setup canvas
+        const canvas = document.getElementById('game-canvas');
+        canvas.width = Math.min(800, window.innerWidth - 40);
+        canvas.height = Math.min(600, window.innerHeight - 100);
+        
+        // Ensure the canvas has dark background in hacker mode
+        if (!document.body.classList.contains('professional-mode')) {
+            canvas.style.backgroundColor = '#000';
+        }
+        
+        // Position paddle
+        gameState.paddle.x = (canvas.width - gameState.paddle.width) / 2;
+        gameState.paddle.y = canvas.height - 30;
+        
+        // Position ball
+        gameState.balls[0].x = canvas.width / 2;
+        gameState.balls[0].y = canvas.height - 50;
+        
+        // Generate bricks from ASCII art
+        generateBricksFromAscii(asciiArts[Math.floor(Math.random() * asciiArts.length)]);
+        
+        // Update score display
+        document.getElementById('game-score').innerText = `Score: ${gameState.score} | Level: ${gameState.level}`;
+        
+        // Add event listeners
+        window.addEventListener('keydown', gameKeyDownHandler);
+        window.addEventListener('keyup', gameKeyUpHandler);
+        canvas.addEventListener('touchstart', gameTouchStartHandler, { passive: false });
+        canvas.addEventListener('touchmove', gameTouchMoveHandler, { passive: false });
+        window.addEventListener('resize', gameResizeHandler);
+        
+        // Show message
+        document.getElementById('game-message').style.display = 'block';
+        document.getElementById('game-message').innerText = 'Press SPACE to start';
+        
+        // Draw initial game state
+        drawGame();
+    }
+    
+    function generateBricksFromAscii(asciiArt) {
+        // Parse the ASCII art and create bricks
+        const lines = asciiArt.trim().split('\n');
+        const brickWidth = 30;
+        const brickHeight = 15;
+        const canvas = document.getElementById('game-canvas');
+        const startX = (canvas.width - (lines[0].length * brickWidth / 4)) / 2;
+        const startY = 50;
+        
+        gameState.bricks = [];
+        
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].replace(/<\/?span[^>]*>/g, ''); // Remove span tags
+            for (let j = 0; j < line.length; j++) {
+                if (line[j] !== ' ') {
+                    gameState.bricks.push({
+                        x: startX + (j * brickWidth / 4),
+                        y: startY + (i * brickHeight),
+                        width: brickWidth / 4,
+                        height: brickHeight,
+                        status: 1,
+                        color: line[j] === '█' ? '#39ff14' : 
+                               line[j] === '▒' ? '#2e7d32' : 
+                               line[j] === '▓' ? '#1b5e20' : 
+                               line[j] === '░' ? '#217a0c' : 
+                               '#39ff14'
+                    });
+                }
+            }
+        }
+    }
+    
+    function updateGameScore() {
+        document.getElementById('game-score').innerText = `Score: ${gameState.score} | Level: ${gameState.level}`;
+    }
+    
+    function gameKeyDownHandler(e) {
+        if (e.code === 'Space') {
+            if (gameState.waiting || gameState.gameOver || gameState.win) {
+                startGame();
+            }
+        } else if (e.code === 'ArrowRight') {
+            gameState.paddle.rightPressed = true;
+        } else if (e.code === 'ArrowLeft') {
+            gameState.paddle.leftPressed = true;
+        } else if (e.code === 'Escape') {
+            closeMainGame();
+        }
+    }
+    
+    function gameKeyUpHandler(e) {
+        if (e.code === 'ArrowRight') {
+            gameState.paddle.rightPressed = false;
+        } else if (e.code === 'ArrowLeft') {
+            gameState.paddle.leftPressed = false;
+        }
+    }
+    
+    function gameTouchStartHandler(e) {
+        gameState.paddle.touchStartX = e.touches[0].clientX;
+        
+        // Start game on touch if waiting
+        if (gameState.waiting || gameState.gameOver || gameState.win) {
+            startGame();
+        }
+    }
+    
+    function gameTouchMoveHandler(e) {
+        e.preventDefault();
+        if (gameState.paddle.touchStartX) {
+            const touchX = e.touches[0].clientX;
+            const deltaX = touchX - gameState.paddle.touchStartX;
+            gameState.paddle.touchStartX = touchX;
+            
+            // Move paddle
+            gameState.paddle.x += deltaX;
+            
+            // Keep paddle in canvas bounds
+            if (gameState.paddle.x < 0) {
+                gameState.paddle.x = 0;
+            } else if (gameState.paddle.x + gameState.paddle.width > document.getElementById('game-canvas').width) {
+                gameState.paddle.x = document.getElementById('game-canvas').width - gameState.paddle.width;
+            }
+        }
+    }
+    
+    function gameResizeHandler() {
+        const canvas = document.getElementById('game-canvas');
+        canvas.width = Math.min(800, window.innerWidth - 40);
+        canvas.height = Math.min(600, window.innerHeight - 100);
+        
+        // Adjust paddle position
+        gameState.paddle.y = canvas.height - 30;
+        
+        // Redraw game
+        drawGame();
+    }
+    
+    function startGame() {
+        // Clear the message right away to provide immediate feedback
+        document.getElementById('game-message').style.display = 'none';
+        
+        // Reset game state properly
+        gameState.waiting = false;
+        gameState.gameOver = false;
+        gameState.win = false;
+        gameState.running = true;
+        
+        // Cancel any existing game loop first to avoid multiple loops
+        if (mainGameLoop) {
+            cancelAnimationFrame(mainGameLoop);
+            mainGameLoop = null;
+        }
+        
+        // Reset if restarting game
+        gameState.score = 0;
+        gameState.level = 1;
+        gameState.speed = 1;
+        
+        // Reset balls
+        gameState.balls = [{
+            x: document.getElementById('game-canvas').width / 2,
+            y: document.getElementById('game-canvas').height - 50,
+            radius: 8,
+            dx: 4,
+            dy: -4,
+            active: true
+        }];
+        
+        // Reset paddle
+        gameState.paddle.width = 100;
+        
+        // Generate new bricks
+        generateBricksFromAscii(asciiArts[Math.floor(Math.random() * asciiArts.length)]);
+        
+        // Update score display
+        updateGameScore();
+        
+        // Start game loop
+        mainGameLoop = requestAnimationFrame(updateGame);
+    }
+    
+    function drawGame() {
+        const canvas = document.getElementById('game-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // Get colors based on current mode
+        const colors = document.body.classList.contains('professional-mode') ? 
+            {
+                paddle: '#3498db',
+                ball: '#e74c3c',
+                brick: '#2c3e50',
+                powerUp: {
+                    multiBall: '#9b59b6',
+                    bigPaddle: '#3498db',
+                    slowBall: '#f1c40f'
+                },
+                text: '#2c3e50'
+            } : 
+            {
+                paddle: '#39ff14',
+                ball: '#39ff14',
+                brick: '#39ff14',
+                powerUp: {
+                    multiBall: '#ff00ff',
+                    bigPaddle: '#0000ff',
+                    slowBall: '#ffff00'
+                },
+                text: '#39ff14'
+            };
+        
+        // Draw paddle
+        ctx.fillStyle = colors.paddle;
+        ctx.fillRect(gameState.paddle.x, gameState.paddle.y, gameState.paddle.width, gameState.paddle.height);
+        
+        // Draw balls
+        for (const ball of gameState.balls) {
+            if (ball.active) {
+                ctx.beginPath();
+                ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+                ctx.fillStyle = colors.ball;
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+        
+        // Draw bricks
+        for (const brick of gameState.bricks) {
+            if (brick.status === 1) {
+                ctx.fillStyle = document.body.classList.contains('professional-mode') ? 
+                    colors.brick : (brick.color || colors.brick);
+                ctx.fillRect(brick.x, brick.y, brick.width, brick.height);
+            }
+        }
+        
+        // Draw power-ups
+        for (const powerUp of gameState.powerUps) {
+            if (powerUp.active) {
+                ctx.beginPath();
+                ctx.rect(powerUp.x - 10, powerUp.y - 10, 20, 20);
+                if (powerUp.type === 'multiBall') ctx.fillStyle = colors.powerUp.multiBall;
+                else if (powerUp.type === 'bigPaddle') ctx.fillStyle = colors.powerUp.bigPaddle;
+                else if (powerUp.type === 'slowBall') ctx.fillStyle = colors.powerUp.slowBall;
+                ctx.fill();
+                ctx.closePath();
+            }
+        }
+    }
+    
+    function updateGame() {
+        if (!gameState.running) {
+            return;
+        }
+        
+        // Move paddle
+        if (gameState.paddle.rightPressed && 
+            gameState.paddle.x + gameState.paddle.width < document.getElementById('game-canvas').width) {
+            gameState.paddle.x += gameState.paddle.speed;
+        } else if (gameState.paddle.leftPressed && gameState.paddle.x > 0) {
+            gameState.paddle.x -= gameState.paddle.speed;
+        }
+        
+        // Move balls and check collisions
+        let activeBalls = 0;
+        
+        for (const ball of gameState.balls) {
+            if (ball.active) {
+                activeBalls++;
+                
+                // Move ball
+                ball.x += ball.dx;
+                ball.y += ball.dy;
+                
+                // Wall collision
+                if (ball.x + ball.radius > document.getElementById('game-canvas').width || 
+                    ball.x - ball.radius < 0) {
+                    ball.dx = -ball.dx;
+                }
+                
+                if (ball.y - ball.radius < 0) {
+                    ball.dy = -ball.dy;
+                }
+                
+                // Paddle collision
+                if (ball.y + ball.radius > gameState.paddle.y && 
+                    ball.x > gameState.paddle.x && 
+                    ball.x < gameState.paddle.x + gameState.paddle.width && 
+                    ball.y + ball.radius < gameState.paddle.y + gameState.paddle.height) {
+                    
+                    // Calculate angle based on where ball hits paddle
+                    const hitPos = (ball.x - gameState.paddle.x) / gameState.paddle.width;
+                    const angle = hitPos * Math.PI - Math.PI/2;
+                    
+                    const speed = Math.sqrt(ball.dx * ball.dx + ball.dy * ball.dy);
+                    ball.dx = Math.cos(angle) * speed;
+                    ball.dy = -Math.abs(Math.sin(angle) * speed);
+                }
+                
+                // Bottom edge collision (ball lost)
+                if (ball.y + ball.radius > document.getElementById('game-canvas').height) {
+                    ball.active = false;
+                }
+                
+                // Brick collision
+                for (const brick of gameState.bricks) {
+                    if (brick.status === 1) {
+                        if (ball.x > brick.x && 
+                            ball.x < brick.x + brick.width && 
+                            ball.y > brick.y && 
+                            ball.y < brick.y + brick.height) {
+                            
+                            ball.dy = -ball.dy;
+                            brick.status = 0;
+                            gameState.score += 10;
+                            
+                            // Update score display
+                            updateGameScore();
+                            
+                            // Create power-up with 20% chance
+                            if (Math.random() < 0.2) {
+                                const powerUpTypes = ['multiBall', 'bigPaddle', 'slowBall'];
+                                const type = powerUpTypes[Math.floor(Math.random() * powerUpTypes.length)];
+                                
+                                gameState.powerUps.push({
+                                    x: brick.x + brick.width/2,
+                                    y: brick.y + brick.height/2,
+                                    type: type,
+                                    active: true
+                                });
+                            }
+                            
+                            // Check if all bricks are broken
+                            if (gameState.bricks.every(b => b.status === 0)) {
+                                if (gameState.level < 5) {
+                                    nextLevel();
+                                } else {
+                                    // Game won!
+                                    gameState.win = true;
+                                    gameState.running = false;
+                                    document.getElementById('game-message').innerText = 
+                                        '====== ACCESS GRANTED ======\n\n' +
+                                        'You\'ve successfully hacked the system!\n' +
+                                        'Press SPACE to play again';
+                                    document.getElementById('game-message').style.display = 'block';
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Check if all balls are lost
+        if (activeBalls === 0) {
+            gameState.gameOver = true;
+            gameState.running = false;
+            document.getElementById('game-message').innerText = 'GAME OVER\nPress SPACE to restart';
+            document.getElementById('game-message').style.display = 'block';
+        }
+        
+        // Update power-ups
+        for (const powerUp of gameState.powerUps) {
+            if (powerUp.active) {
+                powerUp.y += 2;
+                
+                // Check if power-up is caught
+                if (powerUp.y + 10 > gameState.paddle.y && 
+                    powerUp.x > gameState.paddle.x && 
+                    powerUp.x < gameState.paddle.x + gameState.paddle.width && 
+                    powerUp.y < gameState.paddle.y + gameState.paddle.height) {
+                    
+                    powerUp.active = false;
+                    
+                    // Apply power-up effect
+                    if (powerUp.type === 'multiBall') {
+                        // Add two new balls
+                        for (let i = 0; i < 2; i++) {
+                            const angle = Math.random() * Math.PI;
+                            const speed = 4 * gameState.speed;
+                            
+                            gameState.balls.push({
+                                x: gameState.paddle.x + gameState.paddle.width/2,
+                                y: gameState.paddle.y - 10,
+                                radius: 8,
+                                dx: Math.cos(angle) * speed,
+                                dy: -Math.abs(Math.sin(angle) * speed),
+                                active: true
+                            });
+                        }
+                    } else if (powerUp.type === 'bigPaddle') {
+                        gameState.paddle.width = Math.min(gameState.paddle.width + 40, 200);
+                    } else if (powerUp.type === 'slowBall') {
+                        for (const ball of gameState.balls) {
+                            if (ball.active) {
+                                const speed = Math.sqrt(ball.dx * ball.dx + ball.dy * ball.dy);
+                                const direction = { x: ball.dx / speed, y: ball.dy / speed };
+                                const newSpeed = Math.max(speed * 0.7, 2);
+                                
+                                ball.dx = direction.x * newSpeed;
+                                ball.dy = direction.y * newSpeed;
+                            }
+                        }
+                    }
+                }
+                
+                // Remove if off-screen
+                if (powerUp.y > document.getElementById('game-canvas').height) {
+                    powerUp.active = false;
+                }
+            }
+        }
+        
+        // Remove inactive power-ups
+        gameState.powerUps = gameState.powerUps.filter(p => p.active);
+        
+        // Draw game
+        drawGame();
+        
+        // Continue the game loop
+        mainGameLoop = requestAnimationFrame(updateGame);
+    }
+    
+    function nextLevel() {
+        gameState.level++;
+        gameState.speed = Math.min(gameState.speed + 0.3, 2.5);
+        
+        // Reset balls with increased speed
+        gameState.balls = [{
+            x: document.getElementById('game-canvas').width / 2,
+            y: document.getElementById('game-canvas').height - 50,
+            radius: 8,
+            dx: 4 * gameState.speed,
+            dy: -4 * gameState.speed,
+            active: true
+        }];
+        
+        // Reset paddle
+        gameState.paddle.width = 100;
+        
+        // Clear power-ups
+        gameState.powerUps = [];
+        
+        // Generate new bricks from new ASCII art
+        generateBricksFromAscii(asciiArts[Math.floor(Math.random() * asciiArts.length)]);
+        
+        // Update score display
+        updateGameScore();
+        
+        // Show level message
+        document.getElementById('game-message').innerText = `Level ${gameState.level}!`;
+        document.getElementById('game-message').style.display = 'block';
+        
+        // Hide after 2 seconds
+        setTimeout(() => {
+            document.getElementById('game-message').style.display = 'none';
+        }, 2000);
+    }
+    
+    function closeMainGame() {
+        const gameContainer = document.getElementById('main-game-container');
+        if (gameContainer) {
+            gameContainer.style.display = 'none';
+            
+            // Stop game loop
+            if (mainGameLoop) {
+                cancelAnimationFrame(mainGameLoop);
+                mainGameLoop = null;
+            }
+            
+            // Remove event listeners
+            window.removeEventListener('keydown', gameKeyDownHandler);
+            window.removeEventListener('keyup', gameKeyUpHandler);
+            
+            // Remove touch handlers
+            const canvas = document.getElementById('game-canvas');
+            if (canvas) {
+                canvas.removeEventListener('touchstart', gameTouchStartHandler);
+                canvas.removeEventListener('touchmove', gameTouchMoveHandler);
+            }
+            
+            // Remove resize handler
+            window.removeEventListener('resize', gameResizeHandler);
+            
+            // Reset game state
+            gameState.running = false;
+            gameState.waiting = true;
+        }
+    }
+    </script>
 </head>
 <body>
     <canvas id="matrix-canvas"></canvas>
+    
+    <!-- Mode toggle switch -->
+    <div class="mode-toggle">
+        <label class="switch">
+            <input type="checkbox" id="mode-switch">
+            <span class="slider round"></span>
+        </label>
+        <span class="mode-label">Hacker Mode</span>
+    </div>
 
     <header>
         <h1 class="glitch" data-text="Deepak M.">Deepak M.</h1>
@@ -665,19 +1866,8 @@
         </p>
     </div>
 
-    <div class="easter-egg-hint">
-        <p>Type <span style="color: var(--accent-color);">findme</span> anywhere on the page...</p>
-    </div>
-
-    <div id="hackTheBoxContainer">
-        <script src="https://www.hackthebox.eu/badge/123105"></script>
-    </div>
-
     <footer>
-        <div class="loading-bar">
-            <div class="loading-progress"></div>
-        </div>
-        <p>root@m4xx:~# Loading kernel modules... <span class="blink">█</span></p>
+        <p>© Deepak M. - Cybersecurity Specialist</p>
     </footer>
 
     <!-- Hidden input to capture keyboard events -->
@@ -702,195 +1892,5 @@
         <input type="text" id="game-input" placeholder="Enter command..." autocomplete="off">
     </div>
 
-    <script>
-    // Matrix rain effect
-    const canvas = document.getElementById('matrix-canvas');
-    const ctx = canvas.getContext('2d');
-    
-    // Make the canvas fullscreen
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-    
-    // Characters used in the matrix rain
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$+-*/=%\"'#&_(),.;:?!\\|{}<>[]^~";
-    
-    // Font size and columns
-    const fontSize = 14;
-    const columns = Math.floor(canvas.width / fontSize);
-    
-    // Array to store the current position of each drop
-    const drops = [];
-    for (let i = 0; i < columns; i++) {
-        drops[i] = Math.random() * -100;
-    }
-    
-    function drawMatrix() {
-        // Set a semi-transparent black background to create the fade effect
-        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        // Set text color
-        ctx.fillStyle = "#39ff14";
-        ctx.font = fontSize + "px monospace";
-        
-        // Draw characters
-        for (let i = 0; i < drops.length; i++) {
-            // Choose a random character
-            const text = chars[Math.floor(Math.random() * chars.length)];
-            
-            // Draw the character
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-            
-            // Move the drop down
-            drops[i]++;
-            
-            // If the drop is off the bottom of the screen, reset it to a random position above the top
-            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                drops[i] = 0;
-            }
-        }
-    }
-    
-    // Run the animation
-    setInterval(drawMatrix, 50);
-    
-    // Popup logic
-    document.addEventListener('DOMContentLoaded', function() {
-        const progressBar = document.querySelector('.loading-progress');
-        const hiddenInput = document.getElementById('hidden-input');
-        
-        // Focus the hidden input to capture keystrokes
-        hiddenInput.focus();
-        
-        // Keep focus on the hidden input
-        document.addEventListener('click', function() {
-            hiddenInput.focus();
-        });
-        
-        // Terminal link
-        document.getElementById('terminal-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            openTerminalGame();
-        });
-        
-        // Progress bar animation end
-        progressBar.addEventListener('animationend', function() {
-            document.querySelector('.popup').style.display = 'block';
-            document.querySelector('.overlay').style.display = 'block';
-            
-            // Fetch and display the IP address
-            fetch('https://api.ipify.org?format=json')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('ip-display').textContent = "Your IP Address: " + data.ip;
-                })
-                .catch(error => console.error('Error:', error));
-        });
-        
-        // Easter egg: keyboard input listener
-        let keysPressed = "";
-        const targetWord = "findme";
-        
-        hiddenInput.addEventListener('input', function(e) {
-            keysPressed += e.data.toLowerCase();
-            
-            // Only keep the last N characters where N is the length of the target word
-            if (keysPressed.length > targetWord.length) {
-                keysPressed = keysPressed.slice(-targetWord.length);
-            }
-            
-            // Check if the keys pressed match the target word
-            if (keysPressed === targetWord) {
-                openTerminalGame();
-                keysPressed = "";
-            }
-        });
-    });
-    
-    function closePopup() {
-        document.querySelector('.popup').style.display = 'none';
-        document.querySelector('.overlay').style.display = 'none';
-    }
-    
-    // Terminal Game Logic
-    let gameHistory = [];
-    const gameCommands = {
-        help: "Available commands: help, clear, ls, cat, cd, pwd, whoami, ping, nmap, exploit, exit",
-        ls: "Documents  Pictures  secret_folder  backdoor.sh",
-        "cat backdoor.sh": "#!/bin/bash\n# This is a backdoor script\necho 'Connecting to remote server...'\nsleep 2\necho 'Access granted!'\necho 'Type exploit to continue'",
-        pwd: "/home/hacker",
-        whoami: "guest (limited access)",
-        "ls secret_folder": "Access denied. Higher privileges required.",
-        "cd secret_folder": "Access denied. Higher privileges required.",
-        ping: "PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.\n64 bytes from 8.8.8.8: icmp_seq=1 ttl=113 time=23.5 ms\n64 bytes from 8.8.8.8: icmp_seq=2 ttl=113 time=24.1 ms",
-        nmap: "Starting Nmap scan...\nPort 22/tcp: open (SSH)\nPort 80/tcp: open (HTTP)\nPort 443/tcp: open (HTTPS)\nPort 1337/tcp: open (unknown service)",
-        exploit: "Exploiting system...\nElevating privileges...\nAccess granted! You are now root.\nCongratulations! You completed the hacking challenge!"
-    };
-    
-    function openTerminalGame() {
-        document.getElementById('game-container').style.display = 'block';
-        document.querySelector('.overlay').style.display = 'block';
-        document.getElementById('game-input').focus();
-        
-        // Initialize the game with a welcome message
-        const gameContent = document.getElementById('game-content');
-        gameContent.innerHTML = '<div style="color: #39ff14;">Welcome to Hack The System!</div>';
-        gameContent.innerHTML += '<div style="color: #39ff14;">This is a simulated terminal. Type "help" to see available commands.</div>';
-        gameContent.innerHTML += '<div style="color: #39ff14;">Your mission: Gain root access to the system.</div>';
-        gameContent.innerHTML += '<div style="color: #999; margin-top: 10px;">root@challenge:~# </div>';
-        
-        // Clear any previous commands
-        gameHistory = [];
-    }
-    
-    function closeGame() {
-        document.getElementById('game-container').style.display = 'none';
-        document.querySelector('.overlay').style.display = 'none';
-    }
-    
-    // Handle game input
-    document.getElementById('game-input').addEventListener('keydown', function(e) {
-        if (e.key === 'Enter') {
-            const command = this.value.trim().toLowerCase();
-            const gameContent = document.getElementById('game-content');
-            
-            // Add command to game history
-            gameHistory.push(command);
-            
-            // Display the command
-            gameContent.innerHTML += '<div style="color: #39ff14;">root@challenge:~# ' + command + '</div>';
-            
-            // Process the command
-            if (command === 'clear') {
-                gameContent.innerHTML = '';
-            } else if (command === 'exit') {
-                closeGame();
-            } else if (gameCommands[command]) {
-                gameContent.innerHTML += '<div style="color: #DDD;">' + gameCommands[command] + '</div>';
-                
-                // Special case for the "exploit" command (winning condition)
-                if (command === 'exploit') {
-                    setTimeout(() => {
-                        gameContent.innerHTML += '<div style="color: #FF5722; margin-top: 15px;">🏆 You\'ve successfully hacked the system! Congratulations!</div>';
-                    }, 1000);
-                }
-            } else {
-                gameContent.innerHTML += '<div style="color: #F44336;">Command not found: ' + command + '</div>';
-            }
-            
-            // Scroll to bottom
-            gameContent.scrollTop = gameContent.scrollHeight;
-            
-            // Clear the input
-            this.value = '';
-        }
-    });
-    
-    // Window resize handler to adjust canvas size
-    window.addEventListener('resize', function() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    });
-    </script>
 </body>
 </html> 
