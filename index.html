@@ -3,99 +3,352 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
+    <title>D33P4K_M - Cybersecurity Specialist</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body {
-            background-color: #000;
-            color: #39ff14;
-            font-family: 'Courier New', monospace;
-            text-align: center;
+        :root {
+            --main-color: #39ff14;
+            --secondary-color: #0c6;
+            --bg-color: #000;
+            --alt-bg-color: #111;
+            --text-color: #ddd;
+            --accent-color: #0f3;
+            --terminal-bg: rgba(10, 10, 10, 0.8);
+            --terminal-border: #39ff14;
+            --glitch-color-1: #ff00ff;
+            --glitch-color-2: #00ffff;
+        }
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
+        body {
+            background-color: var(--bg-color);
+            color: var(--main-color);
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Matrix rain effect */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.15;
+            z-index: -1;
+        }
+
         header {
             padding: 20px;
-            background-color: #333;
-            border-radius: 10px;
-            margin-bottom: 20px;
+            background-color: var(--terminal-bg);
+            border: 1px solid var(--terminal-border);
+            border-radius: 5px;
+            margin: 20px;
+            box-shadow: 0 0 10px var(--main-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--main-color), transparent);
+            animation: scanline 2s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         h1 {
-            text-shadow: 2px 2px 4px #000;
+            text-shadow: 0 0 10px var(--main-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            animation: glitch 5s infinite;
+        }
+
+        .glitch {
+            position: relative;
+        }
+
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            left: 0;
+        }
+
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 var(--glitch-color-1);
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim-2 3s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 var(--glitch-color-2);
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 2.5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(86px, 9999px, 29px, 0); }
+            5% { clip: rect(54px, 9999px, 87px, 0); }
+            10% { clip: rect(35px, 9999px, 79px, 0); }
+            15% { clip: rect(82px, 9999px, 23px, 0); }
+            20% { clip: rect(48px, 9999px, 44px, 0); }
+            25% { clip: rect(62px, 9999px, 92px, 0); }
+            30% { clip: rect(11px, 9999px, 64px, 0); }
+            35% { clip: rect(46px, 9999px, 21px, 0); }
+            40% { clip: rect(32px, 9999px, 95px, 0); }
+            45% { clip: rect(70px, 9999px, 2px, 0); }
+            50% { clip: rect(1px, 9999px, 58px, 0); }
+            55% { clip: rect(18px, 9999px, 89px, 0); }
+            60% { clip: rect(94px, 9999px, 67px, 0); }
+            65% { clip: rect(4px, 9999px, 15px, 0); }
+            70% { clip: rect(39px, 9999px, 55px, 0); }
+            75% { clip: rect(83px, 9999px, 76px, 0); }
+            80% { clip: rect(26px, 9999px, 33px, 0); }
+            85% { clip: rect(68px, 9999px, 41px, 0); }
+            90% { clip: rect(8px, 9999px, 99px, 0); }
+            95% { clip: rect(57px, 9999px, 12px, 0); }
+            100% { clip: rect(19px, 9999px, 87px, 0); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(65px, 9999px, 77px, 0); }
+            5% { clip: rect(93px, 9999px, 19px, 0); }
+            10% { clip: rect(27px, 9999px, 84px, 0); }
+            15% { clip: rect(3px, 9999px, 66px, 0); }
+            20% { clip: rect(47px, 9999px, 38px, 0); }
+            25% { clip: rect(71px, 9999px, 5px, 0); }
+            30% { clip: rect(10px, 9999px, 91px, 0); }
+            35% { clip: rect(99px, 9999px, 81px, 0); }
+            40% { clip: rect(20px, 9999px, 28px, 0); }
+            45% { clip: rect(58px, 9999px, 97px, 0); }
+            50% { clip: rect(75px, 9999px, 42px, 0); }
+            55% { clip: rect(13px, 9999px, 51px, 0); }
+            60% { clip: rect(37px, 9999px, 72px, 0); }
+            65% { clip: rect(80px, 9999px, 6px, 0); }
+            70% { clip: rect(69px, 9999px, 50px, 0); }
+            75% { clip: rect(16px, 9999px, 78px, 0); }
+            80% { clip: rect(53px, 9999px, 31px, 0); }
+            85% { clip: rect(22px, 9999px, 60px, 0); }
+            90% { clip: rect(96px, 9999px, 14px, 0); }
+            95% { clip: rect(43px, 9999px, 25px, 0); }
+            100% { clip: rect(61px, 9999px, 88px, 0); }
         }
 
         nav {
             display: flex;
             justify-content: center;
-            background-color: #333;
+            background-color: var(--terminal-bg);
             padding: 10px;
+            border: 1px solid var(--terminal-border);
+            border-radius: 5px;
+            margin: 0 20px 20px;
         }
 
         nav a {
-            color: #39ff14;
+            color: var(--main-color);
             text-decoration: none;
             margin: 0 20px;
             font-size: 18px;
-            transition: color 0.3s ease, background-color 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 3px;
+            position: relative;
         }
 
         nav a:hover {
-            text-decoration: underline;
-            background-color: #555;
+            text-shadow: 0 0 10px var(--main-color);
+            background-color: rgba(57, 255, 20, 0.1);
+        }
+
+        nav a::before {
+            content: "[";
+            opacity: 0;
+            margin-right: 5px;
+            transition: all 0.3s ease;
+        }
+
+        nav a::after {
+            content: "]";
+            opacity: 0;
+            margin-left: 5px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover::before, nav a:hover::after {
+            opacity: 1;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .terminal {
+            background-color: var(--terminal-bg);
+            color: var(--main-color);
+            padding: 20px;
+            border: 1px solid var(--terminal-border);
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-family: 'Courier New', monospace;
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .terminal::before {
+            content: "root@m4xx:~# ";
+            color: var(--accent-color);
+        }
+
+        .terminal h2 {
+            margin-top: 0;
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .command-prompt {
+            background-color: var(--terminal-bg);
+            color: var(--main-color);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: left;
+            line-height: 1.6;
+            border: 1px solid var(--terminal-border);
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.2);
+            position: relative;
+        }
+
+        .user {
+            color: #4CAF50;
+        }
+
+        .at {
+            color: #FFF;
+        }
+
+        .host {
+            color: #2196F3;
+        }
+
+        .path {
+            color: #FF9800;
+        }
+
+        .command {
+            color: #E91E63;
+        }
+
+        .blink {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
         pre {
             white-space: pre-wrap;
             font-size: 16px;
-            margin: 20px;
+            margin: 20px 0;
+            text-align: center;
         }
 
-        p {
-            font-size: 16px;
-            font-weight: bold;
-            color: #fff;
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
         }
 
-        .command-prompt {
-            background-color: #000;
-            color: #39ff14;
-            padding: 10px;
+        .skill-category {
+            background-color: var(--terminal-bg);
+            border: 1px solid var(--terminal-border);
             border-radius: 5px;
-            margin: 20px;
-            text-align: left;
+            padding: 15px;
+            margin-bottom: 20px;
         }
 
-        #hackTheBoxContainer {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            z-index: 1000;
+        .skill-category h3 {
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .skill-item {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-item::before {
+            content: "[+] ";
+            color: var(--accent-color);
+            margin-right: 5px;
         }
 
         footer {
-            background-color: #333;
-            padding: 10px;
+            background-color: var(--terminal-bg);
+            padding: 15px;
+            border-top: 1px solid var(--terminal-border);
             position: fixed;
             bottom: 0;
             width: 100%;
+            text-align: center;
         }
 
         .loading-bar {
-            background-color: #000;
+            background-color: rgba(0, 0, 0, 0.3);
             height: 20px;
-            width: 60%;
+            width: 80%;
             margin: 10px auto;
             border-radius: 5px;
             overflow: hidden;
             position: relative;
+            border: 1px solid var(--terminal-border);
         }
 
         .loading-progress {
-            background-color: #39ff14;
+            background-color: var(--main-color);
             height: 100%;
             width: 50%;
-            animation: loadingAnimation 50s ; /* Increase animation duration for a slower progress bar */
+            animation: loadingAnimation 50s linear;
+            box-shadow: 0 0 10px var(--main-color);
         }
 
         @keyframes loadingAnimation {
@@ -104,20 +357,44 @@
             100% { width: 0; }
         }
 
-        /* Popup CSS */
         .popup {
             display: none;
             position: fixed;
             left: 50%;
             top: 50%;
             transform: translate(-50%, -50%);
-            background-color: #000;
-            color: #39ff14;
-            padding: 20px;
-            border: 2px solid #39ff14;
+            background-color: var(--terminal-bg);
+            color: var(--main-color);
+            padding: 25px;
+            border: 2px solid var(--terminal-border);
             border-radius: 10px;
             z-index: 1001;
             text-align: left;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 0 20px var(--main-color);
+        }
+
+        .popup h2 {
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .popup button {
+            background-color: var(--terminal-bg);
+            color: var(--main-color);
+            border: 1px solid var(--terminal-border);
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s;
+        }
+
+        .popup button:hover {
+            background-color: var(--main-color);
+            color: var(--bg-color);
         }
 
         .overlay {
@@ -127,41 +404,248 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.8);
             z-index: 1000;
+        }
+
+        .hidden-command {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Game CSS */
+        #game-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--terminal-bg);
+            border: 2px solid var(--terminal-border);
+            border-radius: 10px;
+            z-index: 1002;
+            padding: 20px;
+            width: 80%;
+            max-width: 800px;
+            height: 80%;
+            max-height: 600px;
+            box-shadow: 0 0 20px var(--main-color);
+            overflow: hidden;
+        }
+
+        #game-title {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--terminal-border);
+        }
+
+        #game-content {
+            height: calc(100% - 100px);
+            overflow-y: auto;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--terminal-border);
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        #game-input {
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: var(--main-color);
+            border: 1px solid var(--terminal-border);
+            padding: 8px;
+            font-family: 'Courier New', monospace;
+            outline: none;
+        }
+
+        #game-input:focus {
+            box-shadow: 0 0 10px var(--main-color);
+        }
+
+        #game-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: var(--main-color);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        #hackTheBoxContainer {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 999;
+        }
+
+        .easter-egg-hint {
+            position: fixed;
+            bottom: 50px;
+            right: 20px;
+            background-color: var(--terminal-bg);
+            border: 1px solid var(--terminal-border);
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            opacity: 0.7;
+            z-index: 998;
+        }
+
+        /* Project Section */
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .project-card {
+            background-color: var(--terminal-bg);
+            border: 1px solid var(--terminal-border);
+            border-radius: 5px;
+            padding: 15px;
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px var(--main-color);
+        }
+
+        .project-card h3 {
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .project-card a {
+            color: var(--main-color);
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            border: 1px solid var(--terminal-border);
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+
+        .project-card a:hover {
+            background-color: var(--main-color);
+            color: var(--bg-color);
+        }
+
+        /* Typing effect */
+        .typing {
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 0;
+            animation: typing 3.5s steps(40, end);
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        .typing-container {
+            display: inline-block;
         }
     </style>
 </head>
 <body>
+    <canvas id="matrix-canvas"></canvas>
 
     <header>
-        <h1>Deepak M.</h1>
-        <p>Penetration tester with 5+ years of experience in various fields</p>
+        <h1 class="glitch" data-text="Deepak M.">Deepak M.</h1>
+        <p class="typing">Cybersecurity Specialist | Penetration Tester | 6+ years of experience</p>
     </header>
 
     <nav>
-        <a href="https://www.linkedin.com/in/deepakmistry101101/" target="_blank">LinkedIn</a>
-        <a href="https://github.com/m4xx101" target="_blank">GitHub</a>
-        <a href="https://twitter.com/1m4xx0" target="_blank">Twitter</a>
+        <a href="https://www.linkedin.com/in/deepakmistry101101/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+        <a href="https://github.com/m4xx101" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+        <a href="https://twitter.com/1m4xx0" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+        <a href="#" id="terminal-link"><i class="fas fa-terminal"></i> Terminal</a>
     </nav>
 
-    <div class="command-prompt">
-    <span class="user">m4xx</span><span class="at">@</span><span class="host">m4xx-pc</span> <span class="path">~</span> <span class="command">$ type ./whoami.txt</span>
-        <br>
-        <br>
-        <span>Call me just a tech. As a seasoned penetration tester, I've got a knack for ethical hacking and revealing those hidden vulnerabilities in networks, systems, and applications.<br><br> My toolbox? It's packed with industry-standard tools, and my brain's wired with deep insights into various operating systems and platforms.
+    <div class="container">
+        <div class="command-prompt">
+            <span class="user">m4xx</span><span class="at">@</span><span class="host">m4xx-pc</span> <span class="path">~</span> <span class="command">$ cat ./whoami.txt</span>
+            <br><br>
+            <div class="typing-container">
+                <p>Call me just a tech. As a seasoned penetration tester with 6+ years of experience, I've got a knack for ethical hacking and revealing those hidden vulnerabilities in networks, systems, and applications.</p>
+                <br>
+                <p>My toolbox? It's packed with industry-standard tools, custom Python scripts for OSINT, and my brain's wired with deep insights into various operating systems and platforms.</p>
+                <br>
+                <p>I'm always on the prowl for the latest in security trends and threats – because keeping organizations safe from cyber attacks is kind of my thing.</p>
+                <br>
+                <p>My playgrounds of expertise? Think Application Security, AI/ML Security, Web3 Security, Source Code Review, Network Pentesting, and the art of Red Teaming. Simply put, if there's a digital challenge out there, I'm ready to take it head-on.</p>
+                <br>
+                <p>And yes, For me this ASCII art looks cool :)</p>
+            </div>
+        </div>
 
-I'm always on the prowl for the latest in security trends and threats – because keeping organizations safe from cyber attacks is kind of my thing.<br>
-
-<br>My playgrounds of expertise? Think Blockchain security, AI and LLM security, outsmarting Smart Contracts in DeFi, and the art of Red Teaming. Simply put, if there's a digital challenge out there, I'm ready to take it head-on.</span>
-        <br><br>
-        <span>And yes, For me this ASCII art looks cool :)</span>
+        <div class="terminal">
+            <h2>$ ./show_skills.sh</h2>
+            <div class="skill-category">
+                <h3>Technical Skills</h3>
+                <div class="skill-item">Application Security</div>
+                <div class="skill-item">AI/ML Security</div>
+                <div class="skill-item">Web3 & Blockchain Security</div>
+                <div class="skill-item">Source Code Review</div>
+                <div class="skill-item">Network Penetration Testing</div>
+                <div class="skill-item">OSINT Automation</div>
+                <div class="skill-item">Red Teaming</div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Programming Languages</h3>
+                <div class="skill-item">Python</div>
+                <div class="skill-item">Bash</div>
+                <div class="skill-item">Solidity</div>
+                <div class="skill-item">JavaScript</div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Tools & Frameworks</h3>
+                <div class="skill-item">Harvester-X Framework (Creator)</div>
+                <div class="skill-item">Burp Suite</div>
+                <div class="skill-item">Metasploit</div>
+                <div class="skill-item">Nmap</div>
+                <div class="skill-item">Kali Linux</div>
+            </div>
+        </div>
     </div>
-    
 
-    <pre>
-      <span style="color: blue;">████████████      </span>
-  <span style="color: blue;">████▒▒▒▒▒▒▒▒░░░░████  </span>
+    <div class="container">
+        <div class="terminal">
+            <h2>$ ./list_projects.sh</h2>
+            <div class="projects">
+                <div class="project-card">
+                    <h3>Harvester-X Framework</h3>
+                    <p>A comprehensive OSINT framework developed to automate information gathering and reconnaissance.</p>
+                    <a href="#"><i class="fas fa-code"></i> View Project</a>
+                </div>
+                <div class="project-card">
+                    <h3>OSINT Python Tools</h3>
+                    <p>Collection of custom Python scripts for advanced Open Source Intelligence gathering.</p>
+                    <a href="#"><i class="fas fa-code"></i> View Repository</a>
+                </div>
+                <div class="project-card">
+                    <h3>AI/ML Security Toolkit</h3>
+                    <p>Tools and methodologies for assessing the security of AI and Machine Learning systems.</p>
+                    <a href="#"><i class="fas fa-code"></i> View Project</a>
+                </div>
+            </div>
+        </div>
+
+        <pre>
+      <span style="color: #4CAF50;">████████████      </span>
+  <span style="color: #4CAF50;">████▒▒▒▒▒▒▒▒░░░░████  </span>
 <span style="color: #808080;">██▒▒▒▒            ░░░░██</span>
 <span style="color: #808080;">████                ████</span>
 <span style="color: #808080;">██░░████        ████▓▓██</span>
@@ -174,61 +658,239 @@ I'm always on the prowl for the latest in security trends and threats – becaus
     <span style="color: #808080;">██░░░░░░▒▒▒▒▒▒██    </span>
     <span style="color: #808080;">██▒▒░░░░▒▒▒▒▒▒██    </span>
       <span style="color: #808080;">████████████      </span>
-    </pre>
-    <p>
-        Discord: m4xx6699<br>
-        Email: deepakhelpon@gmail.com
-    </p>
-</div>
+        </pre>
+        <p style="text-align: center; color: var(--text-color);">
+            Discord: m4xx6699<br>
+            Email: deepakhelpon@gmail.com
+        </p>
+    </div>
+
+    <div class="easter-egg-hint">
+        <p>Type <span style="color: var(--accent-color);">findme</span> anywhere on the page...</p>
+    </div>
+
+    <div id="hackTheBoxContainer">
+        <script src="https://www.hackthebox.eu/badge/123105"></script>
+    </div>
 
     <footer>
         <div class="loading-bar">
             <div class="loading-progress"></div>
         </div>
-        <p>ahh. Compiling the loader..</p>
+        <p>root@m4xx:~# Loading kernel modules... <span class="blink">█</span></p>
     </footer>
-    <div id="hackTheBoxContainer">
-        <script src="https://www.hackthebox.eu/badge/123105"></script>
-    </div>
+
+    <!-- Hidden input to capture keyboard events -->
+    <input type="text" id="hidden-input" class="hidden-command" autocomplete="off">
 
     <!-- Popup and overlay divs -->
     <div class="overlay"></div>
     <div class="popup">
-    <h2>Hacking Complete!</h2>
-    <p>Congratulations! You've successfully waited for a progress bar. Your reward? My resume - it's almost as interesting as watching paint dry.</p>
-    <a href="https://drive.google.com/file/d/1JBTCXssqL1tm-vLZ2ye43MSVgtc9RjZR/view?usp=sharing" download="Deepak_Mistry_Resume_5_years.pdf" style="color: #39ff14; text-decoration: underline;">Download My Resume</a>
-    <br><br>
-    <button onclick="closePopup()">Close</button>
-</div>
+        <h2>Access Granted!</h2>
+        <p>Congratulations! You've successfully waited for a progress bar. Your reward? My resume - it's almost as interesting as watching paint dry.</p>
+        <a href="https://drive.google.com/file/d/1JBTCXssqL1tm-vLZ2ye43MSVgtc9RjZR/view?usp=sharing" download="Deepak_Mistry_Resume_6_years.pdf" style="color: #39ff14; text-decoration: underline;">Download My Resume</a>
+        <br><br>
+        <p id="ip-display"></p>
+        <button onclick="closePopup()">Close</button>
+    </div>
+
+    <!-- Game container -->
+    <div id="game-container">
+        <button id="game-close" onclick="closeGame()">×</button>
+        <h2 id="game-title">Hack The System</h2>
+        <div id="game-content"></div>
+        <input type="text" id="game-input" placeholder="Enter command..." autocomplete="off">
+    </div>
 
     <script>
-    // JavaScript to display the popup and fetch the IP address
+    // Matrix rain effect
+    const canvas = document.getElementById('matrix-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Make the canvas fullscreen
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    
+    // Characters used in the matrix rain
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$+-*/=%\"'#&_(),.;:?!\\|{}<>[]^~";
+    
+    // Font size and columns
+    const fontSize = 14;
+    const columns = Math.floor(canvas.width / fontSize);
+    
+    // Array to store the current position of each drop
+    const drops = [];
+    for (let i = 0; i < columns; i++) {
+        drops[i] = Math.random() * -100;
+    }
+    
+    function drawMatrix() {
+        // Set a semi-transparent black background to create the fade effect
+        ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Set text color
+        ctx.fillStyle = "#39ff14";
+        ctx.font = fontSize + "px monospace";
+        
+        // Draw characters
+        for (let i = 0; i < drops.length; i++) {
+            // Choose a random character
+            const text = chars[Math.floor(Math.random() * chars.length)];
+            
+            // Draw the character
+            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+            
+            // Move the drop down
+            drops[i]++;
+            
+            // If the drop is off the bottom of the screen, reset it to a random position above the top
+            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                drops[i] = 0;
+            }
+        }
+    }
+    
+    // Run the animation
+    setInterval(drawMatrix, 50);
+    
+    // Popup logic
     document.addEventListener('DOMContentLoaded', function() {
         const progressBar = document.querySelector('.loading-progress');
+        const hiddenInput = document.getElementById('hidden-input');
+        
+        // Focus the hidden input to capture keystrokes
+        hiddenInput.focus();
+        
+        // Keep focus on the hidden input
+        document.addEventListener('click', function() {
+            hiddenInput.focus();
+        });
+        
+        // Terminal link
+        document.getElementById('terminal-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            openTerminalGame();
+        });
+        
+        // Progress bar animation end
         progressBar.addEventListener('animationend', function() {
             document.querySelector('.popup').style.display = 'block';
             document.querySelector('.overlay').style.display = 'block';
-
-            // Fetching and displaying the IP address
+            
+            // Fetch and display the IP address
             fetch('https://api.ipify.org?format=json')
                 .then(response => response.json())
                 .then(data => {
-                    // Create a new paragraph element to show the IP
-                    var ipParagraph = document.createElement("p");
-                    ipParagraph.textContent = "Your IP Address: " + data.ip;
-
-                    // Add the paragraph to the popup
-                    document.querySelector('.popup').appendChild(ipParagraph);
+                    document.getElementById('ip-display').textContent = "Your IP Address: " + data.ip;
                 })
                 .catch(error => console.error('Error:', error));
         });
+        
+        // Easter egg: keyboard input listener
+        let keysPressed = "";
+        const targetWord = "findme";
+        
+        hiddenInput.addEventListener('input', function(e) {
+            keysPressed += e.data.toLowerCase();
+            
+            // Only keep the last N characters where N is the length of the target word
+            if (keysPressed.length > targetWord.length) {
+                keysPressed = keysPressed.slice(-targetWord.length);
+            }
+            
+            // Check if the keys pressed match the target word
+            if (keysPressed === targetWord) {
+                openTerminalGame();
+                keysPressed = "";
+            }
+        });
     });
-
+    
     function closePopup() {
         document.querySelector('.popup').style.display = 'none';
         document.querySelector('.overlay').style.display = 'none';
     }
+    
+    // Terminal Game Logic
+    let gameHistory = [];
+    const gameCommands = {
+        help: "Available commands: help, clear, ls, cat, cd, pwd, whoami, ping, nmap, exploit, exit",
+        ls: "Documents  Pictures  secret_folder  backdoor.sh",
+        "cat backdoor.sh": "#!/bin/bash\n# This is a backdoor script\necho 'Connecting to remote server...'\nsleep 2\necho 'Access granted!'\necho 'Type exploit to continue'",
+        pwd: "/home/hacker",
+        whoami: "guest (limited access)",
+        "ls secret_folder": "Access denied. Higher privileges required.",
+        "cd secret_folder": "Access denied. Higher privileges required.",
+        ping: "PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.\n64 bytes from 8.8.8.8: icmp_seq=1 ttl=113 time=23.5 ms\n64 bytes from 8.8.8.8: icmp_seq=2 ttl=113 time=24.1 ms",
+        nmap: "Starting Nmap scan...\nPort 22/tcp: open (SSH)\nPort 80/tcp: open (HTTP)\nPort 443/tcp: open (HTTPS)\nPort 1337/tcp: open (unknown service)",
+        exploit: "Exploiting system...\nElevating privileges...\nAccess granted! You are now root.\nCongratulations! You completed the hacking challenge!"
+    };
+    
+    function openTerminalGame() {
+        document.getElementById('game-container').style.display = 'block';
+        document.querySelector('.overlay').style.display = 'block';
+        document.getElementById('game-input').focus();
+        
+        // Initialize the game with a welcome message
+        const gameContent = document.getElementById('game-content');
+        gameContent.innerHTML = '<div style="color: #39ff14;">Welcome to Hack The System!</div>';
+        gameContent.innerHTML += '<div style="color: #39ff14;">This is a simulated terminal. Type "help" to see available commands.</div>';
+        gameContent.innerHTML += '<div style="color: #39ff14;">Your mission: Gain root access to the system.</div>';
+        gameContent.innerHTML += '<div style="color: #999; margin-top: 10px;">root@challenge:~# </div>';
+        
+        // Clear any previous commands
+        gameHistory = [];
+    }
+    
+    function closeGame() {
+        document.getElementById('game-container').style.display = 'none';
+        document.querySelector('.overlay').style.display = 'none';
+    }
+    
+    // Handle game input
+    document.getElementById('game-input').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            const command = this.value.trim().toLowerCase();
+            const gameContent = document.getElementById('game-content');
+            
+            // Add command to game history
+            gameHistory.push(command);
+            
+            // Display the command
+            gameContent.innerHTML += '<div style="color: #39ff14;">root@challenge:~# ' + command + '</div>';
+            
+            // Process the command
+            if (command === 'clear') {
+                gameContent.innerHTML = '';
+            } else if (command === 'exit') {
+                closeGame();
+            } else if (gameCommands[command]) {
+                gameContent.innerHTML += '<div style="color: #DDD;">' + gameCommands[command] + '</div>';
+                
+                // Special case for the "exploit" command (winning condition)
+                if (command === 'exploit') {
+                    setTimeout(() => {
+                        gameContent.innerHTML += '<div style="color: #FF5722; margin-top: 15px;">🏆 You\'ve successfully hacked the system! Congratulations!</div>';
+                    }, 1000);
+                }
+            } else {
+                gameContent.innerHTML += '<div style="color: #F44336;">Command not found: ' + command + '</div>';
+            }
+            
+            // Scroll to bottom
+            gameContent.scrollTop = gameContent.scrollHeight;
+            
+            // Clear the input
+            this.value = '';
+        }
+    });
+    
+    // Window resize handler to adjust canvas size
+    window.addEventListener('resize', function() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
     </script>
-
 </body>
-</html>
+</html> 
