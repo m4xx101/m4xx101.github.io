@@ -26,15 +26,21 @@
             padding: 0;
         }
 
+        /* Update body styles for both modes */
         body {
+            /* Default to professional mode styles */
             background-color: var(--bg-color);
             color: var(--main-color);
-            font-family: 'Courier New', monospace;
+            font-family: 'Roboto', sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
             position: relative;
             overflow-x: hidden;
+        }
+
+        body.hacker-mode {
+            font-family: 'Courier New', monospace;
         }
 
         /* Matrix rain effect */
@@ -238,7 +244,7 @@
         }
 
         .terminal::before {
-            content: "root@m4xx:~# ";
+            content: ""; /* Remove the default prefix */
             color: var(--accent-color);
         }
 
@@ -761,33 +767,10 @@
 
         /* Add after the skills section */
         .terminal {
-            <h2>$ ./show_experience.sh</h2>
-            <div class="experience-timeline">
-                <div class="experience-item">
-                    <div class="experience-date">2021 - Present</div>
-                    <div class="experience-content">
-                        <h3>Security Consultant at NetSPI</h3>
-                        <p>Managing External Penetration Testing, Application Security, and SAST projects. Supporting development teams with issue mitigation and delivering comprehensive security assessments.</p>
-                    </div>
-                </div>
-                <div class="experience-item">
-                    <div class="experience-date">2020 - 2021</div>
-                    <div class="experience-content">
-                        <h3>Associate Consultant at Aujas Networks LTD</h3>
-                        <p>Application Security Engineer for the National Stock Exchange, overseeing web/mobile applications, thick clients, API testing, and code reviews. Remediated critical vulnerabilities including Unauthenticated RCE and HTTP Request Smuggling.</p>
-                    </div>
-                </div>
-                <div class="experience-item">
-                    <div class="experience-date">2019</div>
-                    <div class="experience-content">
-                        <h3>Executive Cyber-i at AGC Networks LTD</h3>
-                        <p>Led penetration testing projects across networks, databases, firewalls, and applications. Delivered comprehensive reports with mitigation strategies for detected vulnerabilities.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+            /* Remove the HTML content from CSS */
+        }
 
-        /* Add Experience Timeline styling */
+        /* Ensure the experience timeline CSS is properly formatted */
         .experience-timeline {
             position: relative;
             padding: 20px 0;
@@ -909,11 +892,87 @@
                 left: -25px;
             }
         }
+
+        /* Hide matrix canvas in professional mode */
+        body.professional-mode #matrix-canvas {
+            opacity: 0;
+            display: none;
+        }
+
+        /* Update professional mode body styles */
+        body.professional-mode {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            background-image: none;
+        }
+
+        /* Enhanced professional mode styling for terminal elements */
+        body.professional-mode .terminal,
+        body.professional-mode .command-prompt {
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* Fix professional mode command colors */
+        body.professional-mode .user {
+            color: #3498db;
+        }
+
+        body.professional-mode .at {
+            color: #333;
+        }
+
+        body.professional-mode .host {
+            color: #2980b9;
+        }
+
+        body.professional-mode .path {
+            color: #e67e22;
+        }
+
+        body.professional-mode .command {
+            color: #9b59b6;
+        }
+
+        /* Fix header name in professional mode */
+        body.professional-mode h1.glitch::before,
+        body.professional-mode h1.glitch::after {
+            display: none;
+        }
+
+        body.professional-mode h1 {
+            text-shadow: none;
+            color: #2c3e50;
+            animation: none;
+        }
+
+        body.professional-mode header::before {
+            display: none;
+        }
+
+        body.professional-mode header {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Fix terminal styles in professional mode */
+        body.professional-mode .skill-item::before {
+            color: #3498db;
+        }
+
+        body.professional-mode .terminal h2,
+        body.professional-mode .command-prompt h2 {
+            border-bottom: 1px solid #ddd;
+            color: #2c3e50;
+        }
     </style>
 
     <script>
-    // Move the mode toggle initialization to the top of the script
-    // so it runs first when the page loads
+    // Improve the mode toggle function to properly maintain scroll position
     function initializeModeToggle() {
         const modeSwitch = document.getElementById('mode-switch');
         const modeLabel = document.querySelector('.mode-label');
@@ -951,10 +1010,13 @@
             '--glitch-color-2': '#00ffff'
         };
         
-        // Function to apply mode
-        function applyMode(isProfessional) {
+        // Function to apply mode without scrolling
+        function applyMode(isHacker) {
+            // Store current scroll position
+            const scrollPos = window.scrollY;
+            
             const root = document.documentElement;
-            const vars = isProfessional ? professionalModeVars : hackerModeVars;
+            const vars = isHacker ? hackerModeVars : professionalModeVars;
             
             // Apply all CSS variables
             for (const [key, value] of Object.entries(vars)) {
@@ -962,44 +1024,68 @@
             }
             
             // Toggle body class
-            if (isProfessional) {
-                document.body.classList.add('professional-mode');
-                modeLabel.textContent = 'Professional Mode';
-            } else {
+            if (isHacker) {
+                document.body.classList.add('hacker-mode');
                 document.body.classList.remove('professional-mode');
                 modeLabel.textContent = 'Hacker Mode';
+                
+                // Make sure matrix is visible
+                const matrixCanvas = document.getElementById('matrix-canvas');
+                if (matrixCanvas) {
+                    matrixCanvas.style.display = 'block';
+                    setTimeout(() => { matrixCanvas.style.opacity = '0.15'; }, 50);
+                }
+            } else {
+                document.body.classList.add('professional-mode');
+                document.body.classList.remove('hacker-mode');
+                modeLabel.textContent = 'Professional Mode';
+                
+                // Hide matrix
+                const matrixCanvas = document.getElementById('matrix-canvas');
+                if (matrixCanvas) {
+                    matrixCanvas.style.opacity = '0';
+                    setTimeout(() => { matrixCanvas.style.display = 'none'; }, 500);
+                }
             }
             
             // Update game canvas if it exists
             const canvas = document.getElementById('game-canvas');
             if (canvas) {
-                canvas.style.backgroundColor = isProfessional ? '#f5f5f5' : '#000';
+                canvas.style.backgroundColor = isHacker ? '#000' : '#f5f5f5';
             }
+            
+            // Restore scroll position with a longer delay
+            setTimeout(() => {
+                window.scrollTo(0, scrollPos);
+            }, 50);
         }
         
-        // Check for saved mode preference
+        // Check for saved mode preference or default to professional
         const savedMode = localStorage.getItem('website-mode');
-        if (savedMode === 'professional') {
-            modeSwitch.checked = true;
-            applyMode(true);
+        if (!savedMode || savedMode === 'professional') {
+            modeSwitch.checked = false;
+            applyMode(false); // Apply professional mode (isHacker = false)
         } else {
-            applyMode(false);
+            modeSwitch.checked = true;
+            applyMode(true);  // Apply hacker mode
+        }
+        
+        // Update the default setting (if no saved preference exists)
+        if (!savedMode) {
+            localStorage.setItem('website-mode', 'professional');
         }
         
         // Add event listener for mode switch
         modeSwitch.addEventListener('change', function() {
-            // Get current scroll position
-            const scrollPos = window.scrollY;
-            
-            const isProfessional = this.checked;
-            localStorage.setItem('website-mode', isProfessional ? 'professional' : 'hacker');
-            applyMode(isProfessional);
-            
-            // Restore scroll position
-            setTimeout(() => {
-                window.scrollTo(0, scrollPos);
-            }, 10);
+            const isHacker = this.checked;
+            localStorage.setItem('website-mode', isHacker ? 'hacker' : 'professional');
+            applyMode(isHacker);
         });
+        
+        // Force fix for initial page load scrolling
+        setTimeout(() => {
+            window.scrollTo(0, 0);
+        }, 100);
     }
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -1041,25 +1127,30 @@
     }
     
     function drawMatrix() {
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        // Don't draw the matrix in professional mode
+        if (document.body.classList.contains('professional-mode')) {
+            return;
+        }
+        
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-            ctx.fillStyle = '#39ff14';
-            ctx.font = fontSize + 'px monospace';
-        
+        ctx.fillStyle = '#39ff14';
+        ctx.font = fontSize + 'px monospace';
+
         for (let i = 0; i < drops.length; i++) {
-                const text = letters[Math.floor(Math.random() * letters.length)];
+            const text = letters[Math.floor(Math.random() * letters.length)];
             ctx.fillText(text, i * fontSize, drops[i] * fontSize);
             
             if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
                 drops[i] = 0;
             }
                 
-                drops[i]++;
-            }
+            drops[i]++;
         }
-        
-        setInterval(drawMatrix, 33);
+    }
+    
+    setInterval(drawMatrix, 33);
         
         // Focus hidden input
         hiddenInput.focus();
@@ -1179,27 +1270,33 @@
         play: "Launching Breakout game..."
     };
     
+    // Update the terminal game prompt display
     function openTerminalGame() {
         document.getElementById('game-container').style.display = 'block';
         document.querySelector('.overlay').style.display = 'block';
         
         // Initialize the game with a welcome message
         const gameContent = document.getElementById('game-content');
-        gameContent.innerHTML = '<div style="color: #39ff14;">Welcome to Hack The System!</div>';
-        gameContent.innerHTML += '<div style="color: #39ff14;">This is a simulated terminal. Type "help" to see available commands.</div>';
-        gameContent.innerHTML += '<div style="color: #39ff14;">Your mission: Gain root access to the system.</div>';
-        gameContent.innerHTML += '<div style="color: #39ff14;">Type "play" to start a game of Breakout.</div>';
-        gameContent.innerHTML += '<div style="color: #999; margin-top: 10px;">root@challenge:~# </div>';
         
-        // Clear any previous commands
+        // Adjust terminal content based on mode
+        if (document.body.classList.contains('professional-mode')) {
+            gameContent.innerHTML = '<div style="color: #2c3e50;">Welcome to the Command Interface!</div>';
+            gameContent.innerHTML += '<div style="color: #2c3e50;">Type "help" to see available commands.</div>';
+            gameContent.innerHTML += '<div style="color: #2c3e50;">Type "play" to start a casual game.</div>';
+            gameContent.innerHTML += '<div style="color: #666; margin-top: 10px;"><span class="user">m4xx</span><span class="at">@</span><span class="host">m4xx-pc</span> <span class="path">~</span> <span class="command">$</span> </div>';
+        } else {
+            gameContent.innerHTML = '<div style="color: #39ff14;">Welcome to Hack The System!</div>';
+            gameContent.innerHTML += '<div style="color: #39ff14;">This is a simulated terminal. Type "help" to see available commands.</div>';
+            gameContent.innerHTML += '<div style="color: #39ff14;">Your mission: Gain root access to the system.</div>';
+            gameContent.innerHTML += '<div style="color: #39ff14;">Type "play" to start a game of Breakout.</div>';
+            gameContent.innerHTML += '<div style="color: #999; margin-top: 10px;"><span class="user">m4xx</span><span class="at">@</span><span class="host">m4xx-pc</span> <span class="path">~</span> <span class="command">$</span> </div>';
+        }
+        
+        // Rest of the existing function remains the same
         gameHistory = [];
-        
-        // Set focus on input with a slight delay
         setTimeout(() => {
             const inputField = document.getElementById('game-input');
             inputField.focus();
-            
-            // Keep focus on terminal when clicking anywhere in container
             document.getElementById('game-container').onclick = function(e) {
                 if (e.target.id !== 'game-close') {
                     inputField.focus();
@@ -1225,8 +1322,9 @@
             // Add command to game history
             gameHistory.push(command);
             
-            // Display the command
-            gameContent.innerHTML += '<div style="color: #39ff14;">root@challenge:~# ' + command + '</div>';
+            // Display the command with consistent format
+            const commandColor = document.body.classList.contains('professional-mode') ? '#2c3e50' : '#39ff14';
+            gameContent.innerHTML += `<div style="color: ${commandColor};"><span class="user">m4xx</span><span class="at">@</span><span class="host">m4xx-pc</span> <span class="path">~</span> <span class="command">$</span> ${command}</div>`;
             
             // Process the command
             if (command === 'clear') {
@@ -1950,6 +2048,20 @@
             gameState.waiting = true;
         }
     }
+
+    // Add general scroll position preservation
+    document.addEventListener('click', function(e) {
+        // Don't interfere with normal link behavior
+        if (e.target.tagName === 'A' || e.target.parentElement.tagName === 'A') {
+            return;
+        }
+        
+        // Prevent unwanted scrolling
+        const scrollPos = window.scrollY;
+        setTimeout(() => {
+            window.scrollTo(0, scrollPos);
+        }, 10);
+    });
     </script>
 </head>
 <body>
@@ -1961,7 +2073,7 @@
             <input type="checkbox" id="mode-switch">
             <span class="slider round"></span>
         </label>
-        <span class="mode-label">Hacker Mode</span>
+        <span class="mode-label">Professional Mode</span>
     </div>
 
     <header>
@@ -1987,12 +2099,13 @@
                 <br>
                 <p>Certified Ethical Hacker (CEH), Certified Red Team Professional, and Certified AppSec Practitioner with a proven track record of delivering secure solutions and comprehensive security assessments.</p>
                 <br>
-                <p>When I'm not securing systems, I enjoy playing guitar, performing card tricks, and participating in CTF competitions. I'm an active bug hunter who has received recognition from Western Union, Atlassian, UpWork, and Palo Alto.</p>
+                <p>When I'm not securing systems, I enjoy playing guitar, performing card tricks, and participating in CTF competitions. I'm an passive bug hunter who has received recognition from Western Union, Atlassian, UpWork, and Palo Alto.</p>
             </div>
         </div>
 
         <div class="terminal">
-            <h2><span class="user">m4xx</span><span class="at">@</span><span class="host">m4xx-pc</span> <span class="path">~</span> <span class="command">$ ./show_skills.sh</span></h2>
+            <span class="user">m4xx</span><span class="at">@</span><span class="host">m4xx-pc</span> <span class="path">~</span> <span class="command">$ ./show_skills.sh</span>
+            <br><br>
             <div class="skill-category">
                 <h3>Technical Expertise</h3>
                 <div class="skill-item">Vulnerability Assessment & Penetration Testing</div>
@@ -2007,6 +2120,7 @@
                 <div class="skill-item">Python</div>
                 <div class="skill-item">Bash</div>
                 <div class="skill-item">Go</div>
+                <div class="skill-item">JavaScript</div>
                 <div class="skill-item">C# .NET</div>
             </div>
             
@@ -2021,7 +2135,8 @@
 
     <div class="container">
         <div class="terminal">
-            <h2><span class="user">m4xx</span><span class="at">@</span><span class="host">m4xx-pc</span> <span class="path">~</span> <span class="command">$ ./list_projects.sh</span></h2>
+            <span class="user">m4xx</span><span class="at">@</span><span class="host">m4xx-pc</span> <span class="path">~</span> <span class="command">$ ./list_projects.sh</span>
+            <br><br>
             <div class="projects">
                 <div class="project-card">
                     <h3>Security Assessment Projects</h3>
@@ -2042,12 +2157,13 @@
         </div>
 
         <div class="terminal">
-            <h2><span class="user">m4xx</span><span class="at">@</span><span class="host">m4xx-pc</span> <span class="path">~</span> <span class="command">$ ./show_experience.sh</span></h2>
+            <span class="user">m4xx</span><span class="at">@</span><span class="host">m4xx-pc</span> <span class="path">~</span> <span class="command">$ ./show_experience.sh</span>
+            <br><br>
             <div class="experience-timeline">
                 <div class="experience-item">
                     <div class="experience-date">2021 - Present</div>
                     <div class="experience-content">
-                        <h3>Security Consultant at NetSPI</h3>
+                        <h3>Sr. Security Consultant at NetSPI</h3>
                         <p>Managing External Penetration Testing, Application Security, and SAST projects. Supporting development teams with issue mitigation and delivering comprehensive security assessments.</p>
                     </div>
                 </div>
@@ -2081,8 +2197,7 @@
         <div class="footer-content">
             <div class="footer-section">
                 <h3>Contact</h3>
-                <p><i class="fas fa-envelope"></i> Email available upon request</p>
-                <p><i class="fas fa-phone"></i> +91-9930663076</p>
+                <p><i class="fas fa-envelope"></i> m4xx101101@gmail.com</p>
             </div>
             <div class="footer-section">
                 <h3>Certifications</h3>
@@ -2090,11 +2205,11 @@
             </div>
             <div class="footer-section">
                 <h3>Location</h3>
-                <p>Mumbai, India</p>
+                <p>Pune, India</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2023 Deepak Mistry - Cybersecurity Specialist</p>
+            <p>© 2025 Deepak Mistry - Cybersecurity Specialist</p>
         </div>
     </footer>
 
