@@ -331,14 +331,51 @@
             margin-right: 5px;
         }
 
+        /* Update footer styling */
         footer {
             background-color: var(--terminal-bg);
-            padding: 15px;
+            padding: 20px 0 15px;
             border-top: 1px solid var(--terminal-border);
-            position: fixed;
-            bottom: 0;
             width: 100%;
             text-align: center;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-bottom: 15px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            padding: 0 15px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        .footer-section p {
+            margin: 5px 0;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(57, 255, 20, 0.2);
+            padding-top: 15px;
+        }
+
+        body.professional-mode .footer-bottom {
+            border-top: 1px solid rgba(44, 62, 80, 0.2);
         }
 
         .loading-bar {
@@ -601,18 +638,26 @@
         /* Update the mode toggle to be more seamless */
         .mode-toggle {
             position: fixed;
-            top: 10px;
-            right: 10px;
+            top: 20px;
+            right: 20px;
             z-index: 1000;
             display: flex;
             align-items: center;
-            background-color: rgba(10, 10, 10, 0.7);
-            padding: 5px 10px;
+            background-color: rgba(10, 10, 10, 0.85);
+            padding: 8px 12px;
             border-radius: 5px;
             border: 1px solid rgba(57, 255, 20, 0.5);
-            box-shadow: 0 0 5px rgba(57, 255, 20, 0.3);
+            box-shadow: 0 0 8px rgba(57, 255, 20, 0.3);
             transition: opacity 0.3s ease;
-            opacity: 0.7;
+            opacity: 0.8;
+            max-width: 200px;
+            width: auto;
+        }
+
+        body.professional-mode .mode-toggle {
+            background-color: rgba(240, 240, 240, 0.9);
+            border: 1px solid rgba(44, 62, 80, 0.3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .mode-toggle:hover {
@@ -714,6 +759,156 @@
             color: #2c3e50;
         }
 
+        /* Add after the skills section */
+        .terminal {
+            <h2>$ ./show_experience.sh</h2>
+            <div class="experience-timeline">
+                <div class="experience-item">
+                    <div class="experience-date">2021 - Present</div>
+                    <div class="experience-content">
+                        <h3>Security Consultant at NetSPI</h3>
+                        <p>Managing External Penetration Testing, Application Security, and SAST projects. Supporting development teams with issue mitigation and delivering comprehensive security assessments.</p>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-date">2020 - 2021</div>
+                    <div class="experience-content">
+                        <h3>Associate Consultant at Aujas Networks LTD</h3>
+                        <p>Application Security Engineer for the National Stock Exchange, overseeing web/mobile applications, thick clients, API testing, and code reviews. Remediated critical vulnerabilities including Unauthenticated RCE and HTTP Request Smuggling.</p>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-date">2019</div>
+                    <div class="experience-content">
+                        <h3>Executive Cyber-i at AGC Networks LTD</h3>
+                        <p>Led penetration testing projects across networks, databases, firewalls, and applications. Delivered comprehensive reports with mitigation strategies for detected vulnerabilities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        /* Add Experience Timeline styling */
+        .experience-timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .experience-timeline:before {
+            content: '';
+            position: absolute;
+            left: 100px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--accent-color);
+            opacity: 0.7;
+        }
+
+        .experience-item {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .experience-date {
+            width: 100px;
+            font-weight: bold;
+            padding-right: 20px;
+            text-align: right;
+            color: var(--main-color);
+        }
+
+        .experience-content {
+            flex: 1;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .experience-content:before {
+            content: '';
+            position: absolute;
+            left: -5px;
+            top: 10px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--main-color);
+            box-shadow: 0 0 10px var(--main-color);
+        }
+
+        .experience-content h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 18px;
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        body.professional-mode .experience-timeline:before {
+            background: #3498db;
+        }
+
+        body.professional-mode .experience-content:before {
+            background: #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+        }
+
+        /* Additional professional styling */
+        .terminal h2 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--main-color);
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--accent-color);
+            display: block;
+            width: 100%;
+        }
+
+        .terminal h2 .user,
+        .terminal h2 .at,
+        .terminal h2 .host,
+        .terminal h2 .path,
+        .terminal h2 .command {
+            font-size: 1.2rem;
+        }
+
+        /* Improve spacing for better readability */
+        .container {
+            margin-bottom: 30px;
+        }
+
+        /* Enhance project cards */
+        .project-card {
+            transition: all 0.3s ease;
+            border-left: 3px solid var(--terminal-border);
+        }
+
+        .project-card:hover {
+            border-left: 3px solid var(--main-color);
+        }
+
+        /* Improved responsive experience timeline */
+        @media (max-width: 768px) {
+            .experience-item {
+                flex-direction: column;
+            }
+            
+            .experience-date {
+                width: 100%;
+                text-align: left;
+                margin-bottom: 10px;
+                padding-left: 30px;
+            }
+            
+            .experience-timeline:before {
+                left: 10px;
+            }
+            
+            .experience-content:before {
+                left: -25px;
+            }
+        }
     </style>
 
     <script>
@@ -793,9 +988,17 @@
         
         // Add event listener for mode switch
         modeSwitch.addEventListener('change', function() {
+            // Get current scroll position
+            const scrollPos = window.scrollY;
+            
             const isProfessional = this.checked;
             localStorage.setItem('website-mode', isProfessional ? 'professional' : 'hacker');
             applyMode(isProfessional);
+            
+            // Restore scroll position
+            setTimeout(() => {
+                window.scrollTo(0, scrollPos);
+            }, 10);
         });
     }
 
@@ -1778,96 +1981,121 @@
             <span class="user">m4xx</span><span class="at">@</span><span class="host">m4xx-pc</span> <span class="path">~</span> <span class="command">$ cat ./whoami.txt</span>
             <br><br>
             <div class="typing-container">
-                <p>Call me just a tech. As a seasoned penetration tester with 6+ years of experience, I've got a knack for ethical hacking and revealing those hidden vulnerabilities in networks, systems, and applications.</p>
+                <p>Experienced Security Consultant with 6+ years in ethical hacking, vulnerability assessments, and security research. Currently working at NetSPI, managing External Penetration Testing, Application Security, and Static Application Security Testing projects.</p>
                 <br>
-                <p>My toolbox? It's packed with industry-standard tools, custom Python scripts for OSINT, and my brain's wired with deep insights into various operating systems and platforms.</p>
+                <p>My expertise spans across network security, web application testing, secure code review, and red teaming. I've successfully identified and mitigated critical vulnerabilities including Unauthenticated RCE, HTTP Request Smuggling, Cross-site Web Socket Hijacking, SQL Injection, and Account Takeovers for major clients including the National Stock Exchange.</p>
                 <br>
-                <p>I'm always on the prowl for the latest in security trends and threats – because keeping organizations safe from cyber attacks is kind of my thing.</p>
+                <p>Certified Ethical Hacker (CEH), Certified Red Team Professional, and Certified AppSec Practitioner with a proven track record of delivering secure solutions and comprehensive security assessments.</p>
                 <br>
-                <p>My playgrounds of expertise? Think Application Security, AI/ML Security, Web3 Security, Source Code Review, Network Pentesting, and the art of Red Teaming. Simply put, if there's a digital challenge out there, I'm ready to take it head-on.</p>
-                <br>
-                <p>And yes, For me this ASCII art looks cool :)</p>
+                <p>When I'm not securing systems, I enjoy playing guitar, performing card tricks, and participating in CTF competitions. I'm an active bug hunter who has received recognition from Western Union, Atlassian, UpWork, and Palo Alto.</p>
             </div>
         </div>
 
         <div class="terminal">
-            <h2>$ ./show_skills.sh</h2>
+            <h2><span class="user">m4xx</span><span class="at">@</span><span class="host">m4xx-pc</span> <span class="path">~</span> <span class="command">$ ./show_skills.sh</span></h2>
             <div class="skill-category">
-                <h3>Technical Skills</h3>
-                <div class="skill-item">Application Security</div>
-                <div class="skill-item">AI/ML Security</div>
-                <div class="skill-item">Web3 & Blockchain Security</div>
-                <div class="skill-item">Source Code Review</div>
-                <div class="skill-item">Network Penetration Testing</div>
-                <div class="skill-item">OSINT Automation</div>
-                <div class="skill-item">Red Teaming</div>
+                <h3>Technical Expertise</h3>
+                <div class="skill-item">Vulnerability Assessment & Penetration Testing</div>
+                <div class="skill-item">Network Security Assessment</div>
+                <div class="skill-item">Application Security (Web/Mobile/API)</div>
+                <div class="skill-item">Secure Code Review (SAST)</div>
+                <div class="skill-item">Red Teaming & Adversary Simulation</div>
             </div>
             
             <div class="skill-category">
-                <h3>Programming Languages</h3>
+                <h3>Programming & Scripting</h3>
                 <div class="skill-item">Python</div>
                 <div class="skill-item">Bash</div>
-                <div class="skill-item">Solidity</div>
-                <div class="skill-item">JavaScript</div>
+                <div class="skill-item">Go</div>
+                <div class="skill-item">C# .NET</div>
             </div>
             
             <div class="skill-category">
-                <h3>Tools & Frameworks</h3>
-                <div class="skill-item">Harvester-X Framework (Creator)</div>
-                <div class="skill-item">Burp Suite</div>
-                <div class="skill-item">Metasploit</div>
-                <div class="skill-item">Nmap</div>
-                <div class="skill-item">Kali Linux</div>
+                <h3>Certifications</h3>
+                <div class="skill-item">Certified Ethical Hacker (CEH)</div>
+                <div class="skill-item">Certified Red Team Professional</div>
+                <div class="skill-item">Certified AppSec Practitioner</div>
             </div>
         </div>
     </div>
 
     <div class="container">
         <div class="terminal">
-            <h2>$ ./list_projects.sh</h2>
+            <h2><span class="user">m4xx</span><span class="at">@</span><span class="host">m4xx-pc</span> <span class="path">~</span> <span class="command">$ ./list_projects.sh</span></h2>
             <div class="projects">
                 <div class="project-card">
-                    <h3>Harvester-X Framework</h3>
-                    <p>A comprehensive OSINT framework developed to automate information gathering and reconnaissance.</p>
-                    <a href="#"><i class="fas fa-code"></i> View Project</a>
+                    <h3>Security Assessment Projects</h3>
+                    <p>Led numerous penetration testing projects for enterprise clients, discovering and addressing critical vulnerabilities. Specializing in web applications, APIs, and network infrastructure assessments.</p>
+                    <a href="#"><i class="fas fa-shield-alt"></i> Case Studies</a>
                 </div>
                 <div class="project-card">
-                    <h3>OSINT Python Tools</h3>
-                    <p>Collection of custom Python scripts for advanced Open Source Intelligence gathering.</p>
+                    <h3>Custom Security Tools</h3>
+                    <p>Developer of specialized security tools for reconnaissance automation, vulnerability scanning, and penetration testing workflows. Increased assessment efficiency by 40%.</p>
                     <a href="#"><i class="fas fa-code"></i> View Repository</a>
                 </div>
                 <div class="project-card">
-                    <h3>AI/ML Security Toolkit</h3>
-                    <p>Tools and methodologies for assessing the security of AI and Machine Learning systems.</p>
-                    <a href="#"><i class="fas fa-code"></i> View Project</a>
+                    <h3>Bug Bounty Achievements</h3>
+                    <p>Active bug hunter with recognized findings for Western Union, Atlassian, UpWork, and Palo Alto. Specialized in identifying business logic flaws and critical security vulnerabilities.</p>
+                    <a href="#"><i class="fas fa-bug"></i> View Highlights</a>
                 </div>
             </div>
         </div>
 
-        <pre>
-      <span style="color: #4CAF50;">████████████      </span>
-  <span style="color: #4CAF50;">████▒▒▒▒▒▒▒▒░░░░████  </span>
-<span style="color: #808080;">██▒▒▒▒            ░░░░██</span>
-<span style="color: #808080;">████                ████</span>
-<span style="color: #808080;">██░░████        ████▓▓██</span>
-<span style="color: #808080;">██░░░░░░████████    ▓▓██</span>
-<span style="color: #808080;">██░░░░    ▒▒▒▒▒▒  ▒▒▓▓██</span>
-<span style="color: #808080;">██░░░░  ░░▒▒▒▒▒▒  ▓▓▓▓██</span>
-  <span style="color: #808080;">██░░░░  ░░▒▒▒▒▒▒▓▓██  </span>
-  <span style="color: #808080;">██░░░░  ░░▒▒▒▒  ▓▓██  </span>
-  <span style="color: #808080;">██░░░░░░░░▒▒▒▒▒▒▓▓██  </span>
-    <span style="color: #808080;">██░░░░░░▒▒▒▒▒▒██    </span>
-    <span style="color: #808080;">██▒▒░░░░▒▒▒▒▒▒██    </span>
-      <span style="color: #808080;">████████████      </span>
-        </pre>
-        <p style="text-align: center; color: var(--text-color);">
-            Discord: m4xx6699<br>
-            Email: deepakhelpon@gmail.com
-        </p>
+        <div class="terminal">
+            <h2><span class="user">m4xx</span><span class="at">@</span><span class="host">m4xx-pc</span> <span class="path">~</span> <span class="command">$ ./show_experience.sh</span></h2>
+            <div class="experience-timeline">
+                <div class="experience-item">
+                    <div class="experience-date">2021 - Present</div>
+                    <div class="experience-content">
+                        <h3>Security Consultant at NetSPI</h3>
+                        <p>Managing External Penetration Testing, Application Security, and SAST projects. Supporting development teams with issue mitigation and delivering comprehensive security assessments.</p>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-date">2020 - 2021</div>
+                    <div class="experience-content">
+                        <h3>Associate Consultant at Aujas Networks LTD</h3>
+                        <p>Application Security Engineer for the National Stock Exchange, overseeing web/mobile applications, thick clients, API testing, and code reviews. Remediated critical vulnerabilities including Unauthenticated RCE and HTTP Request Smuggling.</p>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-date">2019</div>
+                    <div class="experience-content">
+                        <h3>Executive Cyber-i at AGC Networks LTD</h3>
+                        <p>Led penetration testing projects across networks, databases, firewalls, and applications. Delivered comprehensive reports with mitigation strategies for detected vulnerabilities.</p>
+                    </div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-date">2018 - 2019</div>
+                    <div class="experience-content">
+                        <h3>Freelance Developer</h3>
+                        <p>Developed applications and security tools using C# .NET, Android Studio, Python, and Bash. Created automation tools for security assessments and penetration testing.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
+    <!-- Update footer with more professional info -->
     <footer>
-        <p>© Deepak M. - Cybersecurity Specialist</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p><i class="fas fa-envelope"></i> Email available upon request</p>
+                <p><i class="fas fa-phone"></i> +91-9930663076</p>
+            </div>
+            <div class="footer-section">
+                <h3>Certifications</h3>
+                <p>CEH v10 | CRTP | CASP</p>
+            </div>
+            <div class="footer-section">
+                <h3>Location</h3>
+                <p>Mumbai, India</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2023 Deepak Mistry - Cybersecurity Specialist</p>
+        </div>
     </footer>
 
     <!-- Hidden input to capture keyboard events -->
